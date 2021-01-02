@@ -2,14 +2,17 @@ import React, {useState, useEffect} from 'react';
 import ProgressBar from './ProgressBar';
 import {Button, Modal} from 'reactstrap';
 import UpdateGoalForm from './UpdateGoalForm';
+import AddIdeaFromGoal from './AddIdeaFromGoal';
 
 function Goal(props) {
 
-    const [modal, setModal] = useState(false)
+    const [updateModal, setUpdateModal] = useState(false)
+    const [addIdeaModal, setAddIdeaModal] = useState(false)
     const [current, setCurrent] = useState(props.goal['current_value'])
     const [status, setStatus] = useState("")
 
-    const toggle = () => setModal(!modal)
+    const toggleUpdateModal = () => setUpdateModal(!updateModal)
+    const toggleAddIdea = () => setAddIdeaModal(!addIdeaModal)
 
     const today = new Date()
     const start = new Date(props.goal["start_date"])
@@ -25,21 +28,26 @@ function Goal(props) {
 
     const pace = datediff(start, today)/datediff(start, deadline)
 
+    console.log(props.goal)
+
     useEffect(() => {
-        if(props.goal.current_value < pace*props.goal.goal_value) {
+        if(props.goal.current_value - props.goal.start_value < pace*(props.goal.goal_value - props.goal.start_value)) {
             setStatus("behind-goal")
         } else if (props.goal.current_value < props.goal.goal_value) {
             setStatus("ahead-goal")
         } else {
             setStatus("completed-goal")
         }
-    }, current)
+    }, [current, pace])
 
     return(
         <div className={`goal ${status}`}>
             <div className="goal-left">
                 <h2 className="goal-name">{props.goal.metric}</h2>
-                <Button className="update-button" onClick={() => setModal(true)}>Update</Button>
+                <div className="goal-buttons">
+                    <Button className="update-button" onClick={() => setUpdateModal(true)}>Update</Button>
+                    <Button className="add-idea-button" onClick={() => setAddIdeaModal(true)}>Add Idea</Button>
+                </div>
             </div>
             <ProgressBar goal={props.goal} pace={pace} current={current} status={status}/>
             <div className="goal-right">
@@ -52,8 +60,11 @@ function Goal(props) {
                     <p>{props.goal.ideas}</p>
                 </div>
             </div>
-            <Modal isOpen={modal} toggle={toggle}>
-                <UpdateGoalForm goal={props.goal} toggle={toggle} update={setCurrent}/>
+            <Modal isOpen={updateModal} toggle={toggleUpdateModal}>
+                <UpdateGoalForm goal={props.goal} toggle={toggleUpdateModal} update={setCurrent}/>
+            </Modal>
+            <Modal isOpen={addIdeaModal} toggle={toggleAddIdea}>
+                <AddIdeaFromGoal goals={[props.goal]} toggle={toggleAddIdea}/>
             </Modal>
         </div>
     )

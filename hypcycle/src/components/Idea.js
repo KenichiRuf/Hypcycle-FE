@@ -19,21 +19,23 @@ function Idea(props) {
         status: "active",
         description: props.idea.description,
         start_date: null,
-        trial_value: 0,
-        success_value: 0,
+        trials: 0,
+        successes: 0,
         target_success_rate: null
     }
 
     return(
         <div className="idea">
             <Hamburger color="black" />
-            <div className="idea-left">
-                <h2 className="idea-name">{props.idea.name}</h2>
-                <p className="idea-description">{props.idea.description}</p>
-            </div>
-            <div className="idea-right">
-                <Button className="update-button" onClick={() => setUpdateModal(true)}>Edit</Button>
-                <Button className="create-experiment-button" onClick={() => setCreateExperimentModal(true)}>Create Experiment</Button>
+            <div className="idea-content">
+                <div className="idea-left">
+                    <h2 className="idea-name">{props.idea.name}</h2>
+                    <p className="idea-description">{props.idea.description}</p>
+                </div>
+                <div className="idea-right">
+                    <Button className="update-idea-button" onClick={() => setUpdateModal(true)}>Edit</Button>
+                    <Button className="create-experiment-button" onClick={() => setCreateExperimentModal(true)}>Create Experiment</Button>
+                </div>
             </div>
             <Modal isOpen={updateModal} toggle={updateToggle}>
                 <UpdateIdeaForm idea={props.idea} toggle={updateToggle} />

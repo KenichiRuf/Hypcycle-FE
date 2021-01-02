@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import axios from 'axios';
 
-function AddIdeaForm(props) {
+function AddIdeaFromGoal(props) {
 
     const [ideaName, setIdeaName] = useState("")
     const [description, setDescription] = useState("")
     const [goal, setGoal] = useState(props.goals[0])
+    const [ideas, setIdeas] = useState([])
 
     const changeIdeaNameHandler = e => {
         setIdeaName(e.target.value)
@@ -14,6 +15,14 @@ function AddIdeaForm(props) {
     const changeDescriptionHandler = e => {
         setDescription(e.target.value)
     }
+
+    useEffect(() => {
+        axios.get(`http://localhost:4000/api/ideas/${localStorage.getItem("orgId")}`)
+            .then(function(res) {
+                setIdeas(res.data.ideas)
+            })
+            .catch(function(err){console.log(err)})
+    }, [ideas])
 
     const addIdea = e => {
         e.preventDefault();
@@ -24,10 +33,9 @@ function AddIdeaForm(props) {
             created_by: localStorage.getItem("userId"),
             description: description,
             next: null,
-            previous: props.ideas.length === 0 ? null : props.ideas[props.ideas.length-1].id
+            previous: ideas.length === 0 ? null : ideas[ideas.length-1].id
         })
         .then(function(res) {
-            props.setIdeas([...props.ideas, res.data.idea])
             props.toggle();
         })
         .catch(function(err) {console.log(err)})
@@ -53,4 +61,4 @@ function AddIdeaForm(props) {
     )
 }
 
-export default AddIdeaForm;
+export default AddIdeaFromGoal;

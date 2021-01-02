@@ -4,8 +4,8 @@ import axios from 'axios';
 
 function AddExperimentForm(props) {
 
-    const [name, setName] = useState("")
-    const [description, setDescription] = useState("")
+    const [name, setName] = useState(props.experiment.name)
+    const [description, setDescription] = useState(props.experiment.description)
     const [start, setStart] = useState()
     const [target, setTarget] = useState()
 
@@ -41,19 +41,19 @@ function AddExperimentForm(props) {
         <Form onSubmit={addExperiment}>
             <FormGroup>
                 <Label for="experiment-name" className="form-label">Experiment Name</Label>
-                <Input type="text" classname="form-input" id="experiment-name" onChange={changeNameHandler}/>
+                <Input value={name} type="text" className="form-input" id="experiment-name" onChange={changeNameHandler}/>
             </FormGroup>
             <FormGroup>
                 <Label for="description" className="form-label">Description</Label>
-                <Input type="text" classname="form-input" id="description" onChange={changeDescriptionHandler}/>
+                <Input value={description} type="text" className="form-input" id="description" onChange={changeDescriptionHandler}/>
             </FormGroup>
             <FormGroup>
                 <Label for="start-date" className="form-label">Start Date</Label>
-                <Input type="text" classname="form-input" id="start-date" onChange={changeStartHandler}/>
+                <Input type="date" className="form-input" id="start-date" onChange={changeStartHandler}/>
             </FormGroup>
             <FormGroup>
                 <Label for="target" className="form-label">Target Success Rate</Label>
-                <Input type="text" classname="form-input" id="target" onChange={changeTargetHandler}/>
+                <Input type="number" step="any" className="form-input" id="target" onChange={changeTargetHandler}/>
             </FormGroup>
             <Button>Add Experiment</Button>
         </Form>

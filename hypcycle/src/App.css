@@ -350,11 +350,71 @@
   margin-top: 10px;
 }
 
+.idea-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #f5f6f7;
+  padding: 10px;
+  padding-right: 30px;
+}
+
 .idea-right {
   display: flex;
   flex-direction: column;
 }
 
+.update-idea-button {
+  margin-bottom: 5px;
+}
+
 .idea-list {
   list-style-type: none;
+  padding-inline-start: 0px;
+}
+
+/* Experiments */
+
+.experiment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  background-color: #f5f6f7;
+  padding: 20px;
+}
+
+.experiment-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.experiment-stats {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.experiment-stat {
+  margin-right: 30px;
+  margin-bottom: 0px;
+}
+
+.experiment-buttons {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.update-button {
+  margin-bottom: 10px;
+}
+
+.add-to-playbook-button {
+  width: 150px;
 }

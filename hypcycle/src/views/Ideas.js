@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import {Button, Modal} from 'reactstrap';
-import FilterIcon from '../assets/icons/FilterIcon';
+import SortIcon from '../assets/icons/SortIcon';
 import AddIdeaForm from '../components/AddIdeaForm';
 import IdeaList from '../components/IdeaList';
 import Axios from 'axios';
@@ -40,7 +40,7 @@ function Ideas () {
                     <div className="title-buttons">
                         <h1>Ideas</h1>
                         <Button onClick={() => setModal(true)}>+Add Idea</Button>
-                        <Button>Filter {FilterIcon}</Button>
+                        <Button>Sort {SortIcon}</Button>
                     </div>
                     {ideas.length === 0
                         ? <div>
