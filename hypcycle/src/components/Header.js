@@ -1,0 +1,42 @@
+import React, {useState, useEffect} from 'react';
+import logo from "../assets/logo.png";
+import Avatar from "../assets/icons/Avatar";
+import axios from "axios";
+
+function Header () {
+
+    const [user, setUser] = useState("")
+    const [orgName, setOrg] = useState("")
+
+    useEffect(() => {
+        axios.get(`http://localhost:4000/api/users/${localStorage.getItem("userId")}`)
+            .then(function(res) {
+                setUser(res.data.user)
+            })
+            .catch(function(err) {
+                console.log(err)
+            })
+        axios.get(`http://localhost:4000/api/orgs/${localStorage.getItem("orgId")}`)
+            .then(function(res) {
+                setOrg(res.data.org.name)
+            })
+            .catch(function(err) {
+                console.log(err)
+            })
+    }, [orgName])
+    
+    return(
+        <div className="app-header">
+            <a href="/dashboard" className="header-logo"><img src={logo} className="header-logo-image" alt="hypcycle logo"/></a>
+            <div className="app-header-user-block">
+                <div className="app-header-user-block-text">
+                    <h2>{user.first_name} {user.last_name}</h2>
+                    <p>{orgName}</p>
+                </div>
+                {Avatar}
+            </div>
+        </div>
+    )
+}
+
+export default Header;
