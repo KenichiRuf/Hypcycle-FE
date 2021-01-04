@@ -24,7 +24,7 @@ function AddIdeaForm(props) {
             created_by: localStorage.getItem("userId"),
             description: description,
             next: null,
-            previous: props.ideas.length === 0 ? null : props.ideas[props.ideas.length-1].id
+            previous: null
         })
         .then(function(res) {
             props.setIdeas([...props.ideas, res.data.idea])

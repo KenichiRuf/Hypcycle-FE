@@ -1,25 +1,18 @@
-import factorial from './factorial';
+import {factorial, erf, sqrt} from 'mathjs';
 
 function binomialCDF(trials, successes, p) {
     
-    let confidence = 0
-
-    if(successes/trials <= .5) {
+    if(trials>170) {
+        const z = (successes - trials*p)/sqrt(trials*p*(1-p))
+        return (1+erf(z/sqrt(2)))/2
+    } else {
         let i = 0
+        let confidence = 0
         while(i < successes) {
-            let combos = factorial(trials)/(factorial(i)*factorial(trials-i))
-            confidence = confidence + combos*(p**i)*((1-p)**(trials-i))
-            i++
+            confidence = confidence + factorial(trials)/(factorial(i)*factorial(trials-i))*(p**i)*((1-p)**(trials-i))
+            i = i + 1
         }
         return confidence
-    } else {
-        let i = successes
-        while(i <= trials) {
-            let combos = factorial(trials)/(factorial(i)*factorial(trials-i))
-            confidence = confidence + combos*(p**i)*((1-p)**(trials-i))
-            i++
-        }
-        return (1-confidence)
     }
 }
 

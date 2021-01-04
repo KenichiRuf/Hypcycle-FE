@@ -33,7 +33,7 @@ function AddIdeaFromGoal(props) {
             created_by: localStorage.getItem("userId"),
             description: description,
             next: null,
-            previous: ideas.length === 0 ? null : ideas[ideas.length-1].id
+            previous: null
         })
         .then(function(res) {
             props.toggle();

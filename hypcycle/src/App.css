@@ -8,6 +8,13 @@
   color: red;
 }
 
+.loading-indicator {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10%;
+}
+
 /* App */
 .app-container {
   display: flex;
@@ -19,14 +26,14 @@
 }
 
 .view-container {
-  position: fixed;
+  position: absolute;
   left: 70px;
   top: 80px;
   padding-left: 40px;
   padding-right: 25px;
   padding-top: 30px;
-  z-index: -1;
   width: 95%;
+  z-index: -1;
 }
 
 /* Header */
@@ -43,7 +50,8 @@
   padding-left: 25px;
   padding-right: 25px;
   border-bottom: 1px solid #d6d6d6;
-  z-index: -1;
+  z-index: 0;
+  background-color: white;
 }
 
 .header-logo-image {
@@ -122,6 +130,7 @@
   display: flex;
   flex-direction: column;
   width: 5%;
+  z-index: 1;
 }
 
 .sidebar-header {
@@ -256,6 +265,57 @@
   padding-left: 40px;
   padding-right: 40px;
   padding-top: 30px;
+}
+
+.dashboard-stats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.dashboard-stat {
+  border: 1px solid #23395b;
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+  padding: 20px;
+}
+
+.dashboard-charts {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.dashboard-goal-progress {
+  display: flex;
+  flex-direction: row;
+  width: 65%;
+  border: 1px solid grey;
+  padding: 20px;
+}
+
+.dashboard-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard-chart-title {
+  text-align: center;
+}
+
+.dashboard-idea-breakdown {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  border: 1px solid grey;
+}
+
+.dashboard-top-experiments {
+  margin-top: 20px;
 }
 
 /* Goals */
@@ -405,6 +465,10 @@
   margin-bottom: 0px;
 }
 
+.success {
+  color: #28a745;
+}
+
 .experiment-buttons {
   width: auto;
   display: flex;
@@ -417,4 +481,35 @@
 
 .add-to-playbook-button {
   width: 150px;
+}
+
+/* Playbooks */
+
+.playbook {
+  width: 250px;
+  height: 250px;
+}
+
+.clipboard {
+  position: absolute;
+  z-index: -1;
+}
+
+.playbook-content {
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.playbook-list {
+  display: flex;
+  list-style-type: none;
+  padding-inline-start: 0px;
+  margin-top: 20px;
+}
+
+.open-playbook-button:hover {
+  cursor: pointer;
 }
