@@ -513,3 +513,19 @@
 .open-playbook-button:hover {
   cursor: pointer;
 }
+
+/* tags */
+
+.tag {
+  border-radius: 10px
+}
+
+.tag:hover {
+  background-color: #15e5e9;
+  color: white
+}
+
+.selected {
+  background-color: #15e5e9;
+  color: white
+}

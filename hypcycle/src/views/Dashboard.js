@@ -28,8 +28,6 @@ function Dashboard () {
             .catch(err => console.log(err))
     }, [])
 
-    const chartData = [{angle: 1, label: "SEO"}, {angle: 5}, {angle: 2}]
-
     return (
         <div className="app-container">
             <Sidebar />
