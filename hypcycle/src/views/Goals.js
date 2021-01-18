@@ -20,9 +20,12 @@ function Goals () {
         Axios.get(`http://localhost:4000/api/goals/${localStorage.getItem("orgId")}`)
             .then(function(res){
                 setGoalList(res.data.goals)
-                setTimeout(stopLoading, 2000)
+                setTimeout(stopLoading, 1000)
             })
-            .catch(function(err){console.log(err)})
+            .catch(function(err){
+                setTimeout(stopLoading, 1000)
+                console.log(err)
+            })
     }, [])
 
     const toggle = () => {setModal(!modal)}
@@ -52,7 +55,7 @@ function Goals () {
                     }
                 </div>
             </div>
-            <Modal isOpen={modal} toggle={toggle}>
+            <Modal isOpen={modal} toggle={toggle} size="lg">
                 <AddGoalForm toggle={toggle} setGoalList={setGoalList} goals={goalList}/>
             </Modal>
         </div>

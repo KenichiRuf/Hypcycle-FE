@@ -21,9 +21,12 @@ function Playbooks () {
         Axios.get(`http://localhost:4000/api/playbooks/${localStorage.getItem("orgId")}`)
             .then(res => {
                 setPlaybooks(res.data.playbooks)
-                setTimeout(stopLoading, 2000)
+                setTimeout(stopLoading, 1000)
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                setTimeout(stopLoading, 1000)
+                console.log(err)
+            })
     })
 
     return(
