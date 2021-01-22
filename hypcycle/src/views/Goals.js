@@ -24,7 +24,6 @@ function Goals () {
             })
             .catch(function(err){
                 setTimeout(stopLoading, 1000)
-                console.log(err)
             })
     }, [])
 

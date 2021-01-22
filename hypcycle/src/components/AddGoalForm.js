@@ -11,18 +11,20 @@ function AddGoalForm(props) {
     const [deadline, setDeadline] = useState()
     const [metric, setMetric] = useState()
     const [start, setStart] = useState()
-    const [tags, setTags] = useState([{name: "SEO"}, {name: "PPC"}, {name: "CRO"}])
+    const [tags, setTags] = useState([])
+    const [goalTags, setGoalTags] = useState([])
     const [goals, setGoals] = useState([])
-
-    // useEffect(() => {
-    //     axios.get('http://localhost4000/api/tags')
-    //         .then(res => setTags(res.data.tags))
-    //         .catch(err => console.log(err))
-    // }, [])
+    const [filter, setFilter] = useState(new Set())
+    const [allGoals, setAllGoals] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost4000/api/goals')
-            .then(res => setGoals(res.data.goals))
+        axios.get('http://localhost:4000/api/goals')
+            .then(res => {
+                setGoals(res.data.goals)
+                setTags(res.data.tags)
+                setGoalTags(res.data.goalTags)
+                setAllGoals(res.data.goals)
+            })
             .catch(err => console.log(err))
     }, [])
 
@@ -65,8 +67,29 @@ function AddGoalForm(props) {
         .catch(function(err) {console.log(err)})
     }
 
-    const filterGoals = tag => {
-        let filteredList = goals.filter(goal => goal.tags.has(tag.name))
+    const intersection = (goal, filter) => {
+        if(filter.size === 0) {
+            return true
+        } else {
+            let goalTagSet = new Set()
+            let tags = goalTags.filter(tag => tag.goal_id === goal.id)
+            tags.forEach(tag => goalTagSet.add(tag.tag_name))
+            let notEmpty = false
+            for (let element of filter) {
+                if (goalTagSet.has(element)) {
+                    notEmpty = true
+                }
+            }
+            return notEmpty
+        }
+    }
+
+    function filterGoals(tag) {
+        let filterSet = filter
+        let hasTag = filterSet.delete(tag.name)
+        hasTag ? setFilter(filterSet)
+            : setFilter(filter.add(tag.name))
+        let filteredList = allGoals.filter(goal => intersection(goal, filter))
         setGoals(filteredList)
     }
 
@@ -76,7 +99,7 @@ function AddGoalForm(props) {
                 <Form onSubmit={addGoal}>
                     <FormGroup>
                         <Label for="goal-name" className="form-label">Goal Name</Label>
-                        <Input type="text" className="form-input" id="goal-name" onChange={changeGoalNameHandler}/>
+                        <Input value={goalName} type="text" className="form-input" id="goal-name" onChange={changeGoalNameHandler}/>
                     </FormGroup>
                     <FormGroup>
                         <Label for="target" className="form-label">Target</Label>
@@ -105,14 +128,14 @@ function AddGoalForm(props) {
                 <div className="tag-filter">
                     <h3>Filters:</h3>
                     <div className="tag-buttons">
-                        {tags.map(tag => <Tag tag={tag} onClick={() => filterGoals(tag)}/>)}
+                        {tags.map(tag => <Tag tag={tag} filter={filterGoals}/>)}
                     </div>
                 </div>
-                <ul className="goal-picker-list">
-                    {goals.map(goal => <li onClick={() => setGoalName(goal.name)}>
-                        {goal.name}
-                    </li>)}
-                </ul>
+                <div className="goal-picker-list">
+                    {goals.map(goal => <div onClick={() => setGoalName(goal.name)}>
+                        <p>{goal.name}</p>
+                    </div>)}
+                </div>
             </div>
         </div>
     )
