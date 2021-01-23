@@ -28,8 +28,6 @@ function Goal(props) {
 
     const pace = datediff(start, today)/datediff(start, deadline)
 
-    console.log(props.goal)
-
     useEffect(() => {
         if(props.goal.current_value - props.goal.start_value < pace*(props.goal.goal_value - props.goal.start_value)) {
             setStatus("behind-goal")

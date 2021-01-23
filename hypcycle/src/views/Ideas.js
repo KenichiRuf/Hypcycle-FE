@@ -23,16 +23,22 @@ function Ideas () {
             .then(function(res){
                 setGoals(res.data.goals)
             })
-            .catch(function(err){console.log(err)})
+            .catch(function(err){
+                setTimeout(stopLoading, 1000)
+                console.log(err)
+            })
     }, [])
 
     useEffect(() => {
         Axios.get(`http://localhost:4000/api/ideas/${localStorage.getItem("orgId")}`)
             .then(function(res) {
                 setIdeas(res.data.ideas)
-                setTimeout(stopLoading, 2000)
+                setTimeout(stopLoading, 1000)
             })
-            .catch(function(err){console.log(err)})
+            .catch(function(err){
+                setTimeout(stopLoading, 1000)
+                console.log(err)
+            })
     }, [])
 
     const toggle = () => setModal(!modal)

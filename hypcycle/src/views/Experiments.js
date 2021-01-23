@@ -17,10 +17,11 @@ function Experiments () {
         axios.get(`http://localhost:4000/api/experiments/${localStorage.getItem("orgId")}`)
             .then(function(res) {
                 setExperiments(res.data.experiments)
-                setTimeout(stopLoading, 2000)
+                setTimeout(stopLoading, 1000)
             })
             .catch(function(err) {
                 console.log(err)
+                setTimeout(stopLoading, 1000)
             })
     }, [])
 

@@ -325,6 +325,17 @@
   justify-content: space-between;
 }
 
+.addGoalForm {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.addGoalForm-fields {
+  width: 50%;
+}
+
 /* Goal */
 .goal {
   display: flex;
@@ -512,4 +523,46 @@
 
 .open-playbook-button:hover {
   cursor: pointer;
+}
+
+/* tags */
+
+.tag {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  border-radius: 15px;
+  border: 3px solid #15e5e9;
+  width: 75px;
+}
+
+.tag-name {
+  text-align: center;
+}
+
+.tag:hover {
+  cursor: pointer;
+}
+
+.selected {
+  background-color: #15e5e9;
+  color: white
+}
+
+.goal-picker {
+  width: 50%;
+}
+
+.tag-filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.tag-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
 }
