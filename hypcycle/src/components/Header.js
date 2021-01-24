@@ -10,8 +10,9 @@ function Header () {
 
     const [user, setUser] = useState("")
     const [orgName, setOrg] = useState("")
-    const [addOrgModal, setAddOrgModal] = useState("")
+    const [addOrgModal, setAddOrgModal] = useState(false)
     const [redirect, setRedirect] = useState(false)
+    const [showDropdown, setShowDropdown] = useState(false)
 
     useEffect(() => {
         axios.get(`http://localhost:4000/api/users/${localStorage.getItem("userId")}`)
@@ -30,9 +31,9 @@ function Header () {
             })
     }, [orgName])
 
-    const toggleAddOrg = () => {}
+    const toggleAddOrg = () => setAddOrgModal(!addOrgModal)
 
-    const toggleDropdown = () => {}
+    const toggleDropdown = () => setShowDropdown(!showDropdown)
 
     const logout = () => {
         localStorage.removeItem("userId")
@@ -51,7 +52,8 @@ function Header () {
                 </div>
                 <Avatar onClick={toggleDropdown}/>
             </div>
-            <div>
+            <div className={showDropdown ? "profile-dropdown" : "hide"}>
+                <p className="create-new-org" onClick={toggleAddOrg}>Create New Org</p>
                 <p className="logout" onClick={logout}>Logout</p>
             </div>
             <Modal isOpen={addOrgModal} toggle={toggleAddOrg}>
