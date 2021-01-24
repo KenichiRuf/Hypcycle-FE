@@ -3,7 +3,7 @@ import AvatarIcon from '../assets/icons/AvatarIcon';
 
 const Avatar = props => {
     return(
-        <div>
+        <div className="avatar" onClick={props.onClick}>
             {AvatarIcon}
         </div>
     )

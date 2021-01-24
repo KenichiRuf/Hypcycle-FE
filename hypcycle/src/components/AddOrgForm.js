@@ -1,32 +1,38 @@
 import React, {useState} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import {Redirect} from 'react-router';
 import axios from 'axios';
 
 function AddOrgForm(props) {
 
-    const [email, setEmail] = useState("")
+    const [name, setName] = useState("")
+    const [redirect, setRedirect] = useState(false)
 
-    const addUser = e => {
+    const addOrg = e => {
         e.preventDefault()
-        axios.post(`http://localhost:4000/api/users/${localStorage.getItem("orgId")}`, {
-            email: email
+        axios.post(`http://localhost:4000/api/orgs/${localStorage.getItem("userId")}`, {
+            name: name
         })
-        .then(res => props.setUsers([...props.users, res.data.orgUser]))
+        .then(res => {
+            localStorage.setItem("orgId", res.data.orgUser.org_id)
+            setRedirect(true)
+        })
         .catch(err => console.log(err))
     }
 
-    const changeEmailHandler = e => setEmail(e.target.value)
+    const changeNameHandler = e => setName(e.target.value)
 
     return(
         <div className="addOrgForm">
-            <Form onSubmit={addUser}>
-                <h3>Invite a New User</h3>
+            <Form onSubmit={addOrg}>
+                <h3>Create New Org</h3>
                 <FormGroup>
-                    <Label for="email" className="form-label">Email</Label>
-                    <Input type="email" classname="form-input" id="email" onChange={changeEmailHandler}/>
+                    <Label for="name" className="form-label">Org Name</Label>
+                    <Input type="name" classname="form-input" id="name" onChange={changeNameHandler}/>
                 </FormGroup>
-                <Button>Invite User</Button>
+                <Button>Create Org</Button>
             </Form>
+            {redirect ? <Redirect to="/dashboard" /> : null}
         </div>
     )
 }

@@ -80,6 +80,30 @@
   margin-bottom: 0px !important;
 }
 
+.avatar:hover {
+  cursor: pointer
+}
+
+.profile-dropdown {
+  position: absolute;
+  background-color: white;
+  border: 1px solid black;
+  right: 25px;
+  top: 65px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.create-new-org:hover {
+  cursor: pointer
+}
+
+.logout {
+  margin-bottom: 0 !important;
+}
+
 .logout:hover {
   cursor: pointer;
 }

@@ -1,12 +1,9 @@
 import React from 'react';
-import Navigation from '../components/Navigation';
+import {Redirect} from 'react-router';
 
 function Home() {
     return(
-        <div>
-            <Navigation />
-            <h1>Home</h1>
-        </div>
+        <Redirect to="/login" />
     )
 }
 
