@@ -5,6 +5,7 @@ import axios from 'axios';
 import {Button, Modal} from 'reactstrap';
 import FilterIcon from '../assets/icons/FilterIcon';
 import AddUserForm from '../components/AddUserForm';
+import User from '../components/User';
 
 function Users () {
 
@@ -14,10 +15,10 @@ function Users () {
     const toggleAddUserModal = () => setAddUserModal(!addUserModal)
 
     useEffect(() => {
-        axios.get(`http://localhost:4000/api/orgUsers/${localStorage.getItem("orgId")}`)
+        axios.get(`http://localhost:4000/api/users/orgUsers/${localStorage.getItem("orgId")}`)
             .then(res => setUsers(res.data.orgUsers))
             .catch(err => console.log(err))
-    })
+    }, [])
 
     return(
         <div className="app-container">
@@ -30,10 +31,15 @@ function Users () {
                         <Button onClick={toggleAddUserModal}>+Add User</Button>
                         <Button>Filter {FilterIcon}</Button>
                     </div>
+                    <div>
+                        {users.map(user => 
+                            <User user={user} />
+                        )}
+                    </div>
                 </div>
             </div>
             <Modal isOpen={addUserModal} toggle={toggleAddUserModal}>
-                <AddUserForm />
+                <AddUserForm setUsers={setUsers} users={users}/>
             </Modal>
         </div>
     )
