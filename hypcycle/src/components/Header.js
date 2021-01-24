@@ -1,12 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import logo from "../assets/logo.png";
-import Avatar from "../assets/icons/Avatar";
+import Avatar from "../components/Avatar";
 import axios from "axios";
+import {Modal} from "reactstrap";
+import AddOrgForm from "./AddOrgForm";
+import {Redirect} from "react-router"
 
 function Header () {
 
     const [user, setUser] = useState("")
     const [orgName, setOrg] = useState("")
+    const [addOrgModal, setAddOrgModal] = useState("")
+    const [redirect, setRedirect] = useState(false)
 
     useEffect(() => {
         axios.get(`http://localhost:4000/api/users/${localStorage.getItem("userId")}`)
@@ -24,6 +29,17 @@ function Header () {
                 console.log(err)
             })
     }, [orgName])
+
+    const toggleAddOrg = () => {}
+
+    const toggleDropdown = () => {}
+
+    const logout = () => {
+        localStorage.removeItem("userId")
+        localStorage.removeItem("token")
+        localStorage.removeItem("orgId")
+        setRedirect(true)
+    }
     
     return(
         <div className="app-header">
@@ -33,8 +49,15 @@ function Header () {
                     <h2>{user.first_name} {user.last_name}</h2>
                     <p>{orgName}</p>
                 </div>
-                {Avatar}
+                <Avatar onClick={toggleDropdown}/>
             </div>
+            <div>
+                <p className="logout" onClick={logout}>Logout</p>
+            </div>
+            <Modal isOpen={addOrgModal} toggle={toggleAddOrg}>
+                <AddOrgForm />
+            </Modal>
+            {redirect ? <Redirect to='/login'/> : null}
         </div>
     )
 }

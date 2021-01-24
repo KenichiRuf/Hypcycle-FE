@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import axios from 'axios';
 
-function AddUserForm(props) {
+function AddOrgForm(props) {
 
     const [email, setEmail] = useState("")
 
@@ -18,7 +18,7 @@ function AddUserForm(props) {
     const changeEmailHandler = e => setEmail(e.target.value)
 
     return(
-        <div className="addUserForm">
+        <div className="addOrgForm">
             <Form onSubmit={addUser}>
                 <h3>Invite a New User</h3>
                 <FormGroup>
@@ -31,4 +31,4 @@ function AddUserForm(props) {
     )
 }
 
-export default AddUserForm;
+export default AddOrgForm;

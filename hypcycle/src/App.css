@@ -80,6 +80,10 @@
   margin-bottom: 0px !important;
 }
 
+.logout:hover {
+  cursor: pointer;
+}
+
 /* Navigation */
 
 .navigation {
