@@ -474,6 +474,21 @@
   padding-inline-start: 0px;
 }
 
+.addIdeaForm {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.addIdeaForm-fields {
+  width: 50%;
+}
+
+.idea-picker {
+  width: 50%;
+}
+
 /* Experiments */
 
 .experiment {

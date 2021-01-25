@@ -22,6 +22,7 @@ function Ideas () {
         Axios.get(`http://localhost:4000/api/goals/${localStorage.getItem("orgId")}`)
             .then(function(res){
                 setGoals(res.data.goals)
+                console.log(res)
             })
             .catch(function(err){
                 setTimeout(stopLoading, 1000)
@@ -34,6 +35,7 @@ function Ideas () {
             .then(function(res) {
                 setIdeas(res.data.ideas)
                 setTimeout(stopLoading, 1000)
+                console.log(res)
             })
             .catch(function(err){
                 setTimeout(stopLoading, 1000)
@@ -69,7 +71,7 @@ function Ideas () {
                     }
                 </div>
             </div>
-            <Modal isOpen={modal} toggle={toggle}>
+            <Modal size="lg" isOpen={modal} toggle={toggle}>
                 <AddIdeaForm toggle={toggle} ideas={ideas} setIdeas={setIdeas} goals ={goals}/>
             </Modal>
         </div>
