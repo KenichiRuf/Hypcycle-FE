@@ -5,14 +5,18 @@ import axios from 'axios';
 function AddUserForm(props) {
 
     const [email, setEmail] = useState("")
+    const [message, setMessage] = useState("")
 
     const addUser = e => {
         e.preventDefault()
         axios.post(`http://localhost:4000/api/users/${localStorage.getItem("orgId")}`, {
             email: email
         })
-        .then(res => props.setUsers([...props.users, res.data.orgUser]))
-        .catch(err => console.log(err))
+        .then(res => {
+            props.setUsers([...props.users, res.data.orgUser])
+            setMessage("Invite Successful!")
+        })
+        .catch(err => setMessage("Invite Failed"))
     }
 
     const changeEmailHandler = e => setEmail(e.target.value)
@@ -26,6 +30,7 @@ function AddUserForm(props) {
                     <Input type="email" classname="form-input" id="email" onChange={changeEmailHandler}/>
                 </FormGroup>
                 <Button>Invite User</Button>
+                <p>{message}</p>
             </Form>
         </div>
     )

@@ -12,6 +12,7 @@ import Users from './views/Users';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 import PlaybookView from './views/PlaybookView';
+import ResetPassword from './views/ResetPassword';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       <PrivateRoute exact path="/playbooks" component={Playbooks} />
       <PrivateRoute exact path="/users" component={Users} />
       <PrivateRoute exact path="/playbooks/:id" render={props => <PlaybookView {...props}/>} />
+      <Route path="/reset-password/:email/:userId/:password" component={ResetPassword}/>
     </Router>
   );
 }
