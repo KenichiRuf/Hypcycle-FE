@@ -6,9 +6,9 @@ import TestTubeIcon from '../assets/icons/TestTubeIcon';
 import GoalIcon from '../assets/icons/GoalIcon';
 import IdeaIcon from '../assets/icons/IdeaIcon';
 import axios from 'axios';
-import {Spinner} from 'reactstrap';
+import {Spinner, Button} from 'reactstrap';
 import ExperimentList from '../components/ExperimentList';
-import {RadialChart} from 'react-vis';
+import DashboardChart from '../components/DashboardChart';
 
 function Dashboard () {
 
@@ -36,27 +36,31 @@ function Dashboard () {
                 <div className="view-container">
                     {loadingStats ? <Spinner style={{width: "200px", height: "200px"}} color="info" />
                         : <div className="dashboard-stats">
-                            <DashboardStat title="ACTIVE EXPERIMENTS" value={experiments.length} icon={TestTubeIcon} />
-                            <DashboardStat title="ACTIVE GOALS" value={goals.length} icon={GoalIcon} />
-                            <DashboardStat title="IDEA BACKLOG" value={ideas.length} icon={IdeaIcon} />
+                            <DashboardStat title="ACTIVE EXPERIMENTS" value={experiments.length} icon={TestTubeIcon} metric="Experiment"/>
+                            <DashboardStat title="ACTIVE GOALS" value={goals.length} icon={GoalIcon} metric="Goal"/>
+                            <DashboardStat title="IDEA BACKLOG" value={ideas.length} icon={IdeaIcon} metric="Idea"/>
                         </div>
                     }
                     <div className="dashboard-charts">
                         <div className="dashboard-goal-progress">
-                            {goals.map(goal => <div className="dashboard-chart">
-                                    <h4 className="dashboard-chart-title">{goal.name}</h4>
-                                    <RadialChart 
-                                        data={[{angle: goal.goal_value - goal.current_value}, {angle: goal.current_value - goal.start_value, label: `${100*(goal.current_value-goal.start_value)/(goal.goal_value-goal.start_value)}%`}]}
-                                        height={200}
-                                        width={200}
-                                        labelsRadiusMultiplier={.6}
-                                        showLabels
-                                    />
+                            <h3>Goal Progress</h3>
+                            <div>
+                                {goals.length === 0
+                                ? <div>
+                                    <p>You haven't set any goals yet.</p>
+                                    <a href="/goals"><Button>Create Goals</Button></a>
                                 </div>
-                            )}
+                                : goals.map(goal => <DashboardChart goal={goal} />)}
+                            </div>
                         </div>
                         <div className="dashboard-idea-breakdown">
-
+                            <h3>Idea Breakdown</h3>
+                            {ideas.length === 0
+                                ? <div>
+                                    <p>You haven't created any ideas yet.</p>
+                                    <a href="/ideas"><Button>Create Ideas</Button></a>
+                                </div>
+                                : ideas.map(idea => <DashboardChart idea={idea} />)}
                         </div>
                     </div>
                     <div className="dashboard-top-experiments">
