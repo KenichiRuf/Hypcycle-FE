@@ -2,6 +2,7 @@ import React from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Idea from './Idea';
 import axios from 'axios';
+import domain from '../globalVariables/domain';
 
 const IdeaList = (props) => {
 
@@ -16,7 +17,7 @@ const IdeaList = (props) => {
 
         props.setIdeas(items);
         
-        axios.put("http://localhost:4000/api/ideas/move", {
+        axios.put(`${domain}/api/ideas/move`, {
             idea: reorderedItem,
             reference: reference,
             head: result.destination.index === 0 ? true : false

@@ -10,6 +10,7 @@ import {Spinner, Button} from 'reactstrap';
 import ExperimentList from '../components/ExperimentList';
 import DashboardGoalChart from '../components/DashboardGoalChart';
 import DashboardIdeaChart from '../components/DashboardIdeaChart';
+import domain from '../globalVariables/domain';
 
 function Dashboard () {
 
@@ -20,7 +21,7 @@ function Dashboard () {
     const [dashboardGoals, setDashboardGoals] = useState([])
 
     useEffect(() => {
-        axios.get(`http://localhost:4000/api/dashboard/${localStorage.getItem("orgId")}`)
+        axios.get(`${domain}/api/dashboard/${localStorage.getItem("orgId")}`)
             .then(function(res) {
                 setExperiments(res.data.data.experiments)
                 setGoals(res.data.data.goals)

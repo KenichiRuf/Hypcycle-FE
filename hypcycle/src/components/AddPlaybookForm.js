@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import axios from 'axios';
+import domain from '../globalVariables/domain';
 
 function AddPlaybookForm(props) {
 
     const [name, setName] = useState("")
 
     const addPlaybook = () => {
-        axios.post('http://localhost:4000/api/playbooks', {
+        axios.post(`${domain}/api/playbooks`, {
             name: name,
             org_id: localStorage.getItem("orgId"),
             owner_id: localStorage.getItem("userId")

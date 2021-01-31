@@ -4,6 +4,7 @@ import {Redirect} from 'react-router';
 import axios from 'axios';
 import Navigation from '../components/Navigation';
 import Org from "../components/Org";
+import domain from '../globalVariables/domain';
 
 function Login () {
     const [email, setEmail] = useState()
@@ -32,7 +33,7 @@ function Login () {
     }
 
     const getOrgs = userId => {
-        axios.get(`http://localhost:4000/api/users/orgUser/${userId}`)
+        axios.get(`${domain}/api/users/orgUser/${userId}`)
             .then(function(res) {
                 setOrgs(res.data.orgUsers);
             })
@@ -44,7 +45,7 @@ function Login () {
         event.preventDefault()
         setSpin(true)
         setError(false)
-        axios.post( "http://localhost:4000/api/auth/login", {
+        axios.post( `${domain}/api/auth/login`, {
                 email: email,
                 password: password
             })

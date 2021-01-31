@@ -6,6 +6,7 @@ import {Modal} from "reactstrap";
 import AddOrgForm from "./AddOrgForm";
 import {Redirect} from "react-router";
 import Org from "./Org";
+import domain from "../globalVariables/domain";
 
 function Header () {
 
@@ -19,13 +20,13 @@ function Header () {
     const [redirectDashboard, setRedirectDashboard] = useState(false)
 
     useEffect(() => {
-        axios.get(`http://localhost:4000/api/users/${localStorage.getItem("userId")}`)
+        axios.get(`${domain}/api/users/${localStorage.getItem("userId")}`)
             .then(res => setUser(res.data.user))
             .catch(err => console.log(err))
-        axios.get(`http://localhost:4000/api/orgs/${localStorage.getItem("orgId")}`)
+        axios.get(`${domain}/api/orgs/${localStorage.getItem("orgId")}`)
             .then(res => setOrg(res.data.org.name))
             .catch(err => console.log(err))
-        axios.get(`http://localhost:4000/api/users/orgUser/${localStorage.getItem("userId")}`)
+        axios.get(`${domain}/api/users/orgUser/${localStorage.getItem("userId")}`)
             .then(res => setOrgUsers(res.data.orgUsers))
             .catch(err => console.log(err))
     }, [orgName])

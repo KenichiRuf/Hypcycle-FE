@@ -5,6 +5,7 @@ import axios from 'axios';
 import DoubleCheckMark from '../assets/icons/DoubleCheckMark';
 import XCircle from '../assets/icons/XCircle';
 import Navigation from '../components/Navigation';
+import domain from '../globalVariables/domain';
 
 function Registration () {
     const [firstName,setFirstName] = useState()
@@ -48,7 +49,7 @@ function Registration () {
         event.preventDefault()
         setError("")
         if(password === confirmPassword) {
-            axios.post( "http://localhost:4000/api/auth/register", {
+            axios.post( `${domain}/api/auth/register`, {
                 first_name: firstName,
                 last_name: lastName,
                 email: email,
