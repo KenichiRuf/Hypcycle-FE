@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import Tag from './Tag';
 import axios from 'axios';
+import domain from '../globalVariables/domain';
 
 function AddGoalForm(props) {
 
@@ -19,7 +20,7 @@ function AddGoalForm(props) {
     const [allGoals, setAllGoals] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:4000/api/goals')
+        axios.get(`${domain}/api/goals`)
             .then(res => {
                 setGoals(res.data.goals)
                 setTags(res.data.tags)
@@ -53,7 +54,7 @@ function AddGoalForm(props) {
 
     const addGoal = e => {
         e.preventDefault();
-        axios.post("http://localhost:4000/api/goals", {
+        axios.post(`${domain}/api/goals`, {
             name: goalName,
             description: description,
             org_id: localStorage.getItem("orgId"),

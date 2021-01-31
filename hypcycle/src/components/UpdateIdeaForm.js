@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import axios from 'axios';
+import domain from '../globalVariables/domain';
 
 function UpdateIdeaForm(props) {
 
@@ -12,7 +13,7 @@ function UpdateIdeaForm(props) {
 
     const updateGoal = e => {
         e.preventDefault();
-        axios.put(`http://localhost:4000/api/goals/${props.goal.id}`, {
+        axios.put(`${domain}/api/goals/${props.goal.id}`, {
             current_value: current,
         })
         .then(function(res) {

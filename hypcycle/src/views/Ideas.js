@@ -6,6 +6,7 @@ import SortIcon from '../assets/icons/SortIcon';
 import AddIdeaForm from '../components/AddIdeaForm';
 import IdeaList from '../components/IdeaList';
 import Axios from 'axios';
+import domain from '../globalVariables/domain';
 
 function Ideas () {
 
@@ -19,7 +20,7 @@ function Ideas () {
     }
 
     useEffect(() => {
-        Axios.get(`http://localhost:4000/api/goals/${localStorage.getItem("orgId")}`)
+        Axios.get(`${domain}/api/goals/${localStorage.getItem("orgId")}`)
             .then(function(res){
                 setGoals(res.data.goals)
             })
@@ -29,7 +30,7 @@ function Ideas () {
     }, [])
 
     useEffect(() => {
-        Axios.get(`http://localhost:4000/api/ideas/${localStorage.getItem("orgId")}`)
+        Axios.get(`${domain}/api/ideas/${localStorage.getItem("orgId")}`)
             .then(function(res) {
                 setIdeas(res.data.ideas)
                 setTimeout(stopLoading, 1000)

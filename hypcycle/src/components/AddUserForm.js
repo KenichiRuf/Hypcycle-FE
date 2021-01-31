@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import axios from 'axios';
+import domain from '../globalVariables/domain';
 
 function AddUserForm(props) {
 
@@ -9,7 +10,7 @@ function AddUserForm(props) {
 
     const addUser = e => {
         e.preventDefault()
-        axios.post(`http://localhost:4000/api/users/${localStorage.getItem("orgId")}`, {
+        axios.post(`${domain}/api/users/${localStorage.getItem("orgId")}`, {
             email: email
         })
         .then(res => {

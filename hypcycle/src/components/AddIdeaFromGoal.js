@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import axios from 'axios';
+import domain from '../globalVariables/domain';
 
 function AddIdeaFromGoal(props) {
 
@@ -17,7 +18,7 @@ function AddIdeaFromGoal(props) {
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:4000/api/ideas/${localStorage.getItem("orgId")}`)
+        axios.get(`${domain}/api/ideas/${localStorage.getItem("orgId")}`)
             .then(function(res) {
                 setIdeas(res.data.ideas)
             })
@@ -26,7 +27,7 @@ function AddIdeaFromGoal(props) {
 
     const addIdea = e => {
         e.preventDefault();
-        axios.post("http://localhost:4000/api/ideas", {
+        axios.post(`${domain}/api/ideas`, {
             name: ideaName,
             goal_id: goal.id,
             org_id: localStorage.getItem("orgId"),

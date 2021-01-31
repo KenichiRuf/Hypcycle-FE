@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import {Redirect} from 'react-router';
 import axios from 'axios';
+import domain from '../globalVariables/domain';
 
 function AddOrgForm(props) {
 
@@ -10,7 +11,7 @@ function AddOrgForm(props) {
 
     const addOrg = e => {
         e.preventDefault()
-        axios.post(`http://localhost:4000/api/orgs/${localStorage.getItem("userId")}`, {
+        axios.post(`${domain}/api/orgs/${localStorage.getItem("userId")}`, {
             name: name
         })
         .then(res => {
