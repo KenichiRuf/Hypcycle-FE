@@ -9,7 +9,7 @@ import Ideas from './views/Ideas';
 import Experiments from './views/Experiments';
 import Playbooks from './views/Playbooks';
 import Users from './views/Users';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 import PlaybookView from './views/PlaybookView';
 import ResetPassword from './views/ResetPassword';
