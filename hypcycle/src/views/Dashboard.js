@@ -6,9 +6,10 @@ import TestTubeIcon from '../assets/icons/TestTubeIcon';
 import GoalIcon from '../assets/icons/GoalIcon';
 import IdeaIcon from '../assets/icons/IdeaIcon';
 import axios from 'axios';
-import {Spinner} from 'reactstrap';
+import {Spinner, Button} from 'reactstrap';
 import ExperimentList from '../components/ExperimentList';
-import {RadialChart} from 'react-vis';
+import DashboardGoalChart from '../components/DashboardGoalChart';
+import DashboardIdeaChart from '../components/DashboardIdeaChart';
 
 function Dashboard () {
 
@@ -16,6 +17,7 @@ function Dashboard () {
     const [experiments, setExperiments] = useState([])
     const [goals, setGoals] = useState([])
     const [ideas, setIdeas] = useState([])
+    const [dashboardGoals, setDashboardGoals] = useState([])
 
     useEffect(() => {
         axios.get(`http://localhost:4000/api/dashboard/${localStorage.getItem("orgId")}`)
@@ -24,6 +26,12 @@ function Dashboard () {
                 setGoals(res.data.data.goals)
                 setIdeas(res.data.data.ideas)
                 setLoadingStats(false)
+                let i
+                let topGoals = []
+                for(i = 0; i<Math.min(3,res.data.data.goals.length); i++) {
+                    topGoals.push(res.data.data.goals[i])
+                }
+                setDashboardGoals(topGoals)
             })
             .catch(err => console.log(err))
     }, [])
@@ -36,27 +44,31 @@ function Dashboard () {
                 <div className="view-container">
                     {loadingStats ? <Spinner style={{width: "200px", height: "200px"}} color="info" />
                         : <div className="dashboard-stats">
-                            <DashboardStat title="ACTIVE EXPERIMENTS" value={experiments.length} icon={TestTubeIcon} />
-                            <DashboardStat title="ACTIVE GOALS" value={goals.length} icon={GoalIcon} />
-                            <DashboardStat title="IDEA BACKLOG" value={ideas.length} icon={IdeaIcon} />
+                            <DashboardStat title="ACTIVE EXPERIMENTS" value={experiments.length} icon={TestTubeIcon} metric="Experiment"/>
+                            <DashboardStat title="ACTIVE GOALS" value={goals.length} icon={GoalIcon} metric="Goal"/>
+                            <DashboardStat title="IDEA BACKLOG" value={ideas.length} icon={IdeaIcon} metric="Idea"/>
                         </div>
                     }
                     <div className="dashboard-charts">
-                        <div className="dashboard-goal-progress">
-                            {goals.map(goal => <div className="dashboard-chart">
-                                    <h4 className="dashboard-chart-title">{goal.name}</h4>
-                                    <RadialChart 
-                                        data={[{angle: goal.goal_value - goal.current_value}, {angle: goal.current_value - goal.start_value, label: `${100*(goal.current_value-goal.start_value)/(goal.goal_value-goal.start_value)}%`}]}
-                                        height={200}
-                                        width={200}
-                                        labelsRadiusMultiplier={.6}
-                                        showLabels
-                                    />
+                        <div className="dashboard-goal-progress dashboard-border">
+                            <h3>Goal Progress</h3>
+                            <div className="dashboard-goal-charts">
+                                {goals.length === 0
+                                ? <div>
+                                    <p>You haven't set any goals yet.</p>
+                                    <a href="/goals"><Button>Create Goals</Button></a>
                                 </div>
-                            )}
+                                : dashboardGoals.map(goal => <DashboardGoalChart goal={goal} />)}
+                            </div>
                         </div>
-                        <div className="dashboard-idea-breakdown">
-
+                        <div className="dashboard-idea-breakdown dashboard-border">
+                            <h3>Idea Breakdown</h3>
+                            {ideas.length === 0
+                                ? <div>
+                                    <p>You haven't created any ideas yet.</p>
+                                    <a href="/ideas"><Button>Create Ideas</Button></a>
+                                </div>
+                                : <DashboardIdeaChart ideas={ideas} />}
                         </div>
                     </div>
                     <div className="dashboard-top-experiments">

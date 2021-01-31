@@ -15,6 +15,10 @@
   margin-top: 10%;
 }
 
+.modal-content {
+  padding: 10px;
+}
+
 /* App */
 .app-container {
   display: flex;
@@ -100,6 +104,10 @@
   cursor: pointer
 }
 
+.switch-org:hover {
+  cursor: pointer;
+}
+
 .logout {
   margin-bottom: 0 !important;
 }
@@ -145,8 +153,6 @@
 .nav-link {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
-  padding-left: 30px !important;
-  padding-right: 30px !important;
 }
 
 /* Sidebar */
@@ -235,7 +241,7 @@
 }
 
 .form-group {
-  width: 45% !important;
+  width: 85%;
 }
 
 .form-control {
@@ -251,6 +257,11 @@
 
 .registration-form {
   margin-top: 50px;
+}
+
+.registration-form-group {
+  width: 45% !important;
+  padding-right: 0 !important;
 }
 
 .registration-button {
@@ -302,11 +313,26 @@
 }
 
 .dashboard-stat {
-  border: 1px solid #23395b;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 30%;
   padding: 20px;
+}
+
+.dashboard-stat-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.dashboard-stat-value {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+.dashboard-stat-icon {
+  max-height: 30px;
 }
 
 .dashboard-charts {
@@ -318,10 +344,15 @@
 
 .dashboard-goal-progress {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 65%;
-  border: 1px solid grey;
   padding: 20px;
+}
+
+.dashboard-goal-charts {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .dashboard-chart {
@@ -339,11 +370,16 @@
   display: flex;
   flex-direction: column;
   width: 30%;
-  border: 1px solid grey;
+  padding: 20px;
 }
 
 .dashboard-top-experiments {
   margin-top: 20px;
+}
+
+.dashboard-border {
+  border: 2px solid #ced3da;
+  border-radius: 3px;
 }
 
 /* Goals */
@@ -364,6 +400,10 @@
   width: 50%;
 }
 
+.suggested-goal:hover {
+  cursor: pointer;
+}
+
 /* Goal */
 .goal {
   display: flex;
@@ -378,6 +418,10 @@
   justify-content: center;
   padding: 2%;
   width: 24%;
+}
+
+.update-goal-button {
+  margin-right: 2%;
 }
 
 .goal-right {
@@ -577,7 +621,8 @@
   align-content: center;
   border-radius: 15px;
   border: 3px solid #15e5e9;
-  width: 75px;
+  width: 60px;
+  height: 24px;
 }
 
 .tag-name {

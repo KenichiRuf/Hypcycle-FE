@@ -80,7 +80,7 @@ function AddIdeaForm(props) {
     return(
         <div className="addIdeaForm">
             <div className="addIdeaForm-fields">
-                <Form onSubmit={() => addIdea()}>
+                <Form onSubmit={addIdea}>
                     <FormGroup>
                         <Label for="idea-name" className="form-label">Idea Name</Label>
                         <Input type="text" value={ideaName} classname="form-input" id="idea-name" onChange={changeIdeaNameHandler}/>
@@ -90,6 +90,7 @@ function AddIdeaForm(props) {
                         <Input type="text" classname="form-input" id="description" onChange={changeDescriptionHandler}/>
                     </FormGroup>
                     <FormGroup>
+                        <Label className="form-label">Select a Goal</Label>
                         <select>
                             {props.goals.map(goal => <option onClick={() => setGoal(goal)}>{goal.name}</option>)}
                         </select>
@@ -98,8 +99,9 @@ function AddIdeaForm(props) {
                 </Form>
             </div>
             <div className="idea-picker">
+                <h4>Popular Ideas</h4>
                 <div className="tag-filter">
-                    <h3>Filters:</h3>
+                    <h4>Filters:</h4>
                     <div className="tag-buttons">
                         {tags.map(tag => <Tag tag={tag} filter={filterIdeas}/>)}
                     </div>

@@ -22,11 +22,9 @@ function Ideas () {
         Axios.get(`http://localhost:4000/api/goals/${localStorage.getItem("orgId")}`)
             .then(function(res){
                 setGoals(res.data.goals)
-                console.log(res)
             })
             .catch(function(err){
                 setTimeout(stopLoading, 1000)
-                console.log(err)
             })
     }, [])
 
@@ -35,11 +33,9 @@ function Ideas () {
             .then(function(res) {
                 setIdeas(res.data.ideas)
                 setTimeout(stopLoading, 1000)
-                console.log(res)
             })
             .catch(function(err){
                 setTimeout(stopLoading, 1000)
-                console.log(err)
             })
     }, [])
 

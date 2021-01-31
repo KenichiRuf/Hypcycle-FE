@@ -3,6 +3,7 @@ import ProgressBar from './ProgressBar';
 import {Button, Modal} from 'reactstrap';
 import UpdateGoalForm from './UpdateGoalForm';
 import AddIdeaFromGoal from './AddIdeaFromGoal';
+import axios from 'axios';
 
 function Goal(props) {
 
@@ -10,6 +11,8 @@ function Goal(props) {
     const [addIdeaModal, setAddIdeaModal] = useState(false)
     const [current, setCurrent] = useState(props.goal['current_value'])
     const [status, setStatus] = useState("")
+    const [ideas, setIdeas] = useState()
+    const [experiments, setExperiments] = useState()
 
     const toggleUpdateModal = () => setUpdateModal(!updateModal)
     const toggleAddIdea = () => setAddIdeaModal(!addIdeaModal)
@@ -36,7 +39,19 @@ function Goal(props) {
         } else {
             setStatus("completed-goal")
         }
-    }, [current, pace])
+    }, [props.goal.current_value, props.goal.goal_value, props.goal.start_value, pace])
+
+    useEffect(() => {
+        axios.get(`http://localhost:4000/api/ideas/goal/${props.goal.id}`)
+            .then(res => setIdeas(res.data.ideas.length))
+            .catch(err => console.log(err))
+    }, [props.goal.id])
+
+    useEffect(() => {
+        axios.get(`http://localhost:4000/api/experiments/goal/${props.goal.id}`)
+            .then(res => setExperiments(res.data.experiments.length))
+            .catch(err => console.log(err))
+    }, [props.goal.id])
 
     return(
         <div className={`goal ${status}`}>
@@ -51,11 +66,11 @@ function Goal(props) {
             <div className="goal-right">
                 <div>
                     <p>Experiments</p>
-                    <p>{props.goal.experiments}</p>
+                    <p>{experiments}</p>
                 </div>
                 <div>
                     <p>Ideas</p>
-                    <p>{props.goal.ideas}</p>
+                    <p>{ideas}</p>
                 </div>
             </div>
             <Modal isOpen={updateModal} toggle={toggleUpdateModal}>

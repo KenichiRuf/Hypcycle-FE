@@ -16,22 +16,22 @@ function Sidebar () {
                 </div>
                 <Nav className="sidebar-items">
                     <NavItem className="sidebar-item">
-                        <a href="/dashboard"><img src="https://img.icons8.com/ios-filled/30/000000/home.png"/></a>
+                        <a href="/dashboard"><img alt="home" src="https://img.icons8.com/ios-filled/30/000000/home.png"/></a>
                     </NavItem>
                     <NavItem className="sidebar-item">
-                    <a href="/goals"><img src="https://img.icons8.com/ios-filled/30/000000/goal.png"/></a>
+                    <a href="/goals"><img alt="goals" src="https://img.icons8.com/ios-filled/30/000000/goal.png"/></a>
                     </NavItem>
                     <NavItem className="sidebar-item">
-                        <a href="/ideas"><img src="https://img.icons8.com/android/30/000000/idea.png"/></a>
+                        <a href="/ideas"><img alt="ideas" src="https://img.icons8.com/android/30/000000/idea.png"/></a>
                     </NavItem>
                     <NavItem className="sidebar-item">
-                        <a href="/experiments"><img src="https://img.icons8.com/ios-filled/30/000000/thin-test-tube.png"/></a>
+                        <a href="/experiments"><img alt="experiments" src="https://img.icons8.com/ios-filled/30/000000/thin-test-tube.png"/></a>
                     </NavItem>
+                    {/* <NavItem className="sidebar-item">
+                        <a href="/playbooks"><img alt="playbooks" src="https://img.icons8.com/ios-filled/30/000000/strategy-board.png"/></a>
+                    </NavItem> */}
                     <NavItem className="sidebar-item">
-                        <a href="/playbooks"><img src="https://img.icons8.com/ios-filled/30/000000/strategy-board.png"/></a>
-                    </NavItem>
-                    <NavItem className="sidebar-item">
-                        <a href="/users"><img src="https://img.icons8.com/ios-filled/30/000000/user-group-man-man.png"/></a>
+                        <a href="/users"><img alt="users" src="https://img.icons8.com/ios-filled/30/000000/user-group-man-man.png"/></a>
                     </NavItem>
                 </Nav>
             </div>
@@ -52,9 +52,9 @@ function Sidebar () {
                     <NavItem className="sidebar-item">
                         <NavLink href="/experiments" className={open ? "sidebar-link" : "hide"}>Experiments</NavLink>
                     </NavItem>
-                    <NavItem className="sidebar-item">
+                    {/* <NavItem className="sidebar-item">
                         <NavLink href="/playbooks" className={open ? "sidebar-link" : "hide"}>Playbooks</NavLink>
-                    </NavItem>
+                    </NavItem> */}
                     <NavItem className="sidebar-item">
                         <NavLink href="/users" className={open ? "sidebar-link sidebar-last" : "hide"}>Users</NavLink>
                     </NavItem>
