@@ -6,7 +6,7 @@ import SortIcon from '../assets/icons/SortIcon';
 import AddPlaybookForm from '../components/AddPlaybookForm';
 import PlaybookList from '../components/PlaybookList';
 import Axios from 'axios';
-import domain from '../globalVariables/domain';
+
 
 function Playbooks () {
 
@@ -19,7 +19,7 @@ function Playbooks () {
     const toggleAddPlaybookModal = () => setAddPlaybookModal(!addPlaybookModal)
 
     useEffect(() => {
-        Axios.get(`${domain}/api/playbooks/${localStorage.getItem("orgId")}`)
+        Axios.get(`${process.env.DOMAIN}/api/playbooks/${localStorage.getItem("orgId")}`)
             .then(res => {
                 setPlaybooks(res.data.playbooks)
                 setTimeout(stopLoading, 1000)

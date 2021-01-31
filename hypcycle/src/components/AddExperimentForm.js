@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import axios from 'axios';
 import {Redirect} from "react-router";
-import domain from "../globalVariables/domain";
 
 function AddExperimentForm(props) {
 
@@ -27,7 +26,7 @@ function AddExperimentForm(props) {
 
     const addExperiment = e => {
         e.preventDefault();
-        axios.post(`${domain}/api/experiments`, {
+        axios.post(`${process.env.DOMAIN}/api/experiments`, {
             ...props.experiment,
             name: name,
             description: description,

@@ -5,7 +5,7 @@ import {Button, Spinner} from 'reactstrap';
 import FilterIcon from '../assets/icons/FilterIcon';
 import ExperimentList from '../components/ExperimentList';
 import axios from 'axios';
-import domain from '../globalVariables/domain';
+
 
 function Experiments () {
 
@@ -15,7 +15,7 @@ function Experiments () {
     const stopLoading = () => setLoading(false)
     
     useEffect(() => {
-        axios.get(`${domain}/api/experiments/${localStorage.getItem("orgId")}`)
+        axios.get(`${process.env.DOMAIN}/api/experiments/${localStorage.getItem("orgId")}`)
             .then(function(res) {
                 setExperiments(res.data.experiments)
                 setTimeout(stopLoading, 1000)

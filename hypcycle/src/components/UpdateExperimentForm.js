@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import axios from 'axios';
-import domain from '../globalVariables/domain';
+
 
 function UpdateExperimentForm(props) {
 
@@ -17,7 +17,7 @@ function UpdateExperimentForm(props) {
 
     const updateExperiment = e => {
         e.preventDefault();
-        axios.put(`${domain}/api/experiments/${props.experiment.id}`, {
+        axios.put(`${process.env.DOMAIN}/api/experiments/${props.experiment.id}`, {
             trials: trials,
             successes: successes
         })

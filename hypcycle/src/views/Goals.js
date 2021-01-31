@@ -6,7 +6,7 @@ import FilterIcon from '../assets/icons/FilterIcon';
 import Goal from '../components/Goal';
 import AddGoalForm from '../components/AddGoalForm';
 import Axios from 'axios';
-import domain from '../globalVariables/domain';
+
 
 function Goals () {
     const [goalList, setGoalList] = useState([])
@@ -18,7 +18,7 @@ function Goals () {
     }
 
     useEffect(() => {
-        Axios.get(`${domain}/api/goals/${localStorage.getItem("orgId")}`)
+        Axios.get(`${process.env.DOMAIN}/api/goals/${localStorage.getItem("orgId")}`)
             .then(function(res){
                 setGoalList(res.data.goals)
                 setTimeout(stopLoading, 1000)

@@ -6,7 +6,7 @@ import {Button, Modal} from 'reactstrap';
 import FilterIcon from '../assets/icons/FilterIcon';
 import AddUserForm from '../components/AddUserForm';
 import User from '../components/User';
-import domain from '../globalVariables/domain';
+
 
 function Users () {
 
@@ -16,7 +16,7 @@ function Users () {
     const toggleAddUserModal = () => setAddUserModal(!addUserModal)
 
     useEffect(() => {
-        axios.get(`${domain}/api/users/orgUsers/${localStorage.getItem("orgId")}`)
+        axios.get(`${process.env.DOMAIN}/api/users/orgUsers/${localStorage.getItem("orgId")}`)
             .then(res => setUsers(res.data.orgUsers))
             .catch(err => console.log(err))
     }, [])

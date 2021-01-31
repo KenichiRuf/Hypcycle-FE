@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import axios from 'axios';
-import domain from '../globalVariables/domain';
+
 
 function AddPlayForm(props) {
 
@@ -11,7 +11,7 @@ function AddPlayForm(props) {
     const [playbook, setPlaybook] = useState()
 
     useEffect(() => {
-        axios.get(`${domain}/api/playbooks/${localStorage.getItem("orgId")}`)
+        axios.get(`${process.env.DOMAIN}/api/playbooks/${localStorage.getItem("orgId")}`)
             .then(res => {
                 setPlaybooks(res.data.playbooks)
                 setPlaybook(res.data.playbooks[0])
@@ -20,7 +20,7 @@ function AddPlayForm(props) {
     }, [])
 
     const addPlay = () => {
-        axios.post(`${domain}/api/plays`, {
+        axios.post(`${process.env.DOMAIN}/api/plays`, {
             name: name,
             description: description,
             playbook_id: playbook.id,

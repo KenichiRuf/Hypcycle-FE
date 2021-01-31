@@ -5,7 +5,7 @@ import DoubleCheckMark from '../assets/icons/DoubleCheckMark';
 import XCircle from '../assets/icons/XCircle';
 import {Redirect} from 'react-router';
 import Org from "../components/Org";
-import domain from '../globalVariables/domain';
+
 
 const ResetPassword = props => {
     const [newPassword, setNewPassword] = useState("")
@@ -33,7 +33,7 @@ const ResetPassword = props => {
     }
 
     const getOrgs = userId => {
-        axios.get(`${domain}/api/users/orgUser/${userId}`)
+        axios.get(`${process.env.DOMAIN}/api/users/orgUser/${userId}`)
             .then(function(res) {
                 setOrgs(res.data.orgUsers);
             })
@@ -46,7 +46,7 @@ const ResetPassword = props => {
         event.preventDefault();
         setError("");
         if(newPassword === confirmPassword) {
-            axios.put(`${domain}/api/users/password/${props.match.params.userId}`, {
+            axios.put(`${process.env.DOMAIN}/api/users/password/${props.match.params.userId}`, {
                 password: newPassword
             })
             .then(res => {
@@ -61,7 +61,7 @@ const ResetPassword = props => {
     const login = event => {
         event.preventDefault()
         if(match) {
-            axios.post( `${domain}/api/auth/login`, {
+            axios.post( `${process.env.DOMAIN}/api/auth/login`, {
                 email: props.match.params.email,
                 password: props.match.params.password
             })
