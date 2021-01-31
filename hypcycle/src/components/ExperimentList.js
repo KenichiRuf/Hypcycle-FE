@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Experiment from './Experiment';
 import {Button} from 'reactstrap';
 

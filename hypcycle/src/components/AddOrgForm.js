@@ -14,7 +14,6 @@ function AddOrgForm(props) {
             name: name
         })
         .then(res => {
-            console.log(res)
             localStorage.setItem("orgId", res.data.org[0])
             setRedirect(true)
         })

@@ -6,6 +6,7 @@ import axios from 'axios';
 function AddGoalForm(props) {
 
     const [goalName, setGoalName] = useState("")
+    const [description, setDescription] = useState("")
     const [target, setTarget] = useState()
     const [current, setCurrent] = useState()
     const [deadline, setDeadline] = useState()
@@ -31,6 +32,9 @@ function AddGoalForm(props) {
     const changeGoalNameHandler = e => {
         setGoalName(e.target.value)
     }
+    const changeDescriptionHandler = e => {
+        setDescription(e.target.value)
+    }
     const changeTargetHandler = e => {
         setTarget(e.target.value)
     }
@@ -51,6 +55,7 @@ function AddGoalForm(props) {
         e.preventDefault();
         axios.post("http://localhost:4000/api/goals", {
             name: goalName,
+            description: description,
             org_id: localStorage.getItem("orgId"),
             owner_id: localStorage.getItem("userId"),
             start_value: current,
@@ -102,6 +107,10 @@ function AddGoalForm(props) {
                         <Input value={goalName} type="text" className="form-input" id="goal-name" onChange={changeGoalNameHandler}/>
                     </FormGroup>
                     <FormGroup>
+                        <Label for="description" className="form-label">Description</Label>
+                        <Input value={description} type="text" className="form-input" id="description" onChange={changeDescriptionHandler}/>
+                    </FormGroup>
+                    <FormGroup>
                         <Label for="target" className="form-label">Target</Label>
                         <Input type="number" className="form-input" id="target" onChange={changeTargetHandler}/>
                     </FormGroup>
@@ -125,14 +134,15 @@ function AddGoalForm(props) {
                 </Form>
             </div>
             <div className="goal-picker">
+                <h1>Goal Suggestions</h1>
                 <div className="tag-filter">
-                    <h3>Filters:</h3>
+                    <h4>Filters:</h4>
                     <div className="tag-buttons">
                         {tags.map(tag => <Tag tag={tag} filter={filterGoals}/>)}
                     </div>
                 </div>
                 <div className="goal-picker-list">
-                    {goals.map(goal => <div onClick={() => setGoalName(goal.name)}>
+                    {goals.map(goal => <div className="suggested-goal" onClick={() => setGoalName(goal.name)}>
                         <p>{goal.name}</p>
                     </div>)}
                 </div>

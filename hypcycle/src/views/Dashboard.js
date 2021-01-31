@@ -8,7 +8,8 @@ import IdeaIcon from '../assets/icons/IdeaIcon';
 import axios from 'axios';
 import {Spinner, Button} from 'reactstrap';
 import ExperimentList from '../components/ExperimentList';
-import DashboardChart from '../components/DashboardChart';
+import DashboardGoalChart from '../components/DashboardGoalChart';
+import DashboardIdeaChart from '../components/DashboardIdeaChart';
 
 function Dashboard () {
 
@@ -16,6 +17,7 @@ function Dashboard () {
     const [experiments, setExperiments] = useState([])
     const [goals, setGoals] = useState([])
     const [ideas, setIdeas] = useState([])
+    const [dashboardGoals, setDashboardGoals] = useState([])
 
     useEffect(() => {
         axios.get(`http://localhost:4000/api/dashboard/${localStorage.getItem("orgId")}`)
@@ -24,6 +26,12 @@ function Dashboard () {
                 setGoals(res.data.data.goals)
                 setIdeas(res.data.data.ideas)
                 setLoadingStats(false)
+                let i
+                let topGoals = []
+                for(i = 0; i<Math.min(3,res.data.data.goals.length); i++) {
+                    topGoals.push(res.data.data.goals[i])
+                }
+                setDashboardGoals(topGoals)
             })
             .catch(err => console.log(err))
     }, [])
@@ -42,25 +50,25 @@ function Dashboard () {
                         </div>
                     }
                     <div className="dashboard-charts">
-                        <div className="dashboard-goal-progress">
+                        <div className="dashboard-goal-progress dashboard-border">
                             <h3>Goal Progress</h3>
-                            <div>
+                            <div className="dashboard-goal-charts">
                                 {goals.length === 0
                                 ? <div>
                                     <p>You haven't set any goals yet.</p>
                                     <a href="/goals"><Button>Create Goals</Button></a>
                                 </div>
-                                : goals.map(goal => <DashboardChart goal={goal} />)}
+                                : dashboardGoals.map(goal => <DashboardGoalChart goal={goal} />)}
                             </div>
                         </div>
-                        <div className="dashboard-idea-breakdown">
+                        <div className="dashboard-idea-breakdown dashboard-border">
                             <h3>Idea Breakdown</h3>
                             {ideas.length === 0
                                 ? <div>
                                     <p>You haven't created any ideas yet.</p>
                                     <a href="/ideas"><Button>Create Ideas</Button></a>
                                 </div>
-                                : ideas.map(idea => <DashboardChart idea={idea} />)}
+                                : <DashboardIdeaChart ideas={ideas} />}
                         </div>
                     </div>
                     <div className="dashboard-top-experiments">

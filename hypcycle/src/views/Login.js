@@ -83,7 +83,7 @@ function Login () {
             </Form>
             <Modal isOpen={modal} toggle={toggle}>
                 <div className="org-list">
-                    {orgs.map(org => <Org org={org} chooseOrg={chooseOrg}/>)}
+                    {orgs.map(org => <Org name={org.name} id={org.id} chooseOrg={chooseOrg}/>)}
                 </div>
             </Modal>
             {loggedIn ? <Redirect to="/dashboard" /> : null}

@@ -23,7 +23,7 @@ function Registration () {
         } else {
             setMatch(false)
         }
-    })
+    }, [password, confirmPassword])
 
     const changeFirstNameHandler = e => {
         setFirstName(e.target.value)
@@ -69,27 +69,27 @@ function Registration () {
                 <h1 className="form-title">Create Account</h1>
                 <hr className="form-divider"/>
                 <div className="form-inputs">
-                    <FormGroup>
+                    <FormGroup className="registration-form-group">
                         <Label for="first-name" className="registration-label">First Name</Label>
                         <Input type="text" className="registration-input" id="first-name" onChange={changeFirstNameHandler}/>
                     </FormGroup>
-                    <FormGroup>
+                    <FormGroup className="registration-form-group">
                         <Label for="last-name" className="registration-label">Last Name</Label>
                         <Input type="text" className="registration-input" id="last-name" onChange={changeLastNameHandler}/>
                     </FormGroup>
-                    <FormGroup>
+                    <FormGroup className="registration-form-group">
                         <Label for="email" className="registration-label">Email</Label>
                         <Input type="email" className="registration-input" id="email" onChange={changeEmailHandler}/>
                     </FormGroup>
-                    <FormGroup>
+                    <FormGroup className="registration-form-group">
                         <Label for="company-name" className="registration-label">Company Name</Label>
                         <Input type="text" className="registration-input" id="company-name" onChange={changeCompanyNameHandler}/>
                     </FormGroup>
-                    <FormGroup>
+                    <FormGroup className="registration-form-group">
                         <Label for="password" className="registration-label">Password</Label>
                         <Input type="password" className="registration-input" id="password" onChange={changePasswordHandler}/>
                     </FormGroup>
-                    <FormGroup>
+                    <FormGroup className="registration-form-group">
                         <Label for="confirm-password" className="registration-label">Confirm Password {match ? DoubleCheckMark : XCircle}</Label>
                         <Input type="password" className="registration-input" id="confirm-password" onChange={changeConfirmPasswordHandler}/>
                     </FormGroup>

@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {Form, FormGroup, Label, Input, Button, Dropdown, DropdownItem} from 'reactstrap';
+import React, {useState} from 'react';
+import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import axios from 'axios';
+import {Redirect} from "react-router";
 
 function AddExperimentForm(props) {
 
@@ -8,6 +9,7 @@ function AddExperimentForm(props) {
     const [description, setDescription] = useState(props.experiment.description)
     const [start, setStart] = useState()
     const [target, setTarget] = useState()
+    const [redirect, setRedirect] = useState(false)
 
     const changeNameHandler = e => {
         setName(e.target.value)
@@ -33,6 +35,7 @@ function AddExperimentForm(props) {
         })
         .then(function(res) {
             props.toggle();
+            setRedirect(true)
         })
         .catch(function(err) {console.log(err)})
     }
@@ -56,6 +59,7 @@ function AddExperimentForm(props) {
                 <Input type="number" step="any" className="form-input" id="target" onChange={changeTargetHandler}/>
             </FormGroup>
             <Button>Add Experiment</Button>
+            {redirect ? <Redirect to="/experiments"/> : null}
         </Form>
     )
 }

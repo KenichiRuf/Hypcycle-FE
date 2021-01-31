@@ -5,7 +5,7 @@ function ProgressBar(props) {
     const currentValue = props.current
     const startValue = props.goal["start_value"]
     const goalValue = props.goal["goal_value"]
-    const pace = Math.round(startValue + props.pace*(goalValue-startValue))
+    const pace = Math.round(props.pace*(goalValue-startValue) + startValue)
 
     if(currentValue < pace) {
         return(

@@ -85,7 +85,7 @@ const ResetPassword = props => {
         } else {
             setMatch(false)
         }
-    })
+    }, [confirmPassword, newPassword])
 
     return(
         <div>
