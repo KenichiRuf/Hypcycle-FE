@@ -19,7 +19,7 @@ function AddGoalForm(props) {
     const [allGoals, setAllGoals] = useState([])
 
     useEffect(() => {
-        axios.get(`http${process.env.DOMAIN}/api/goals`)
+        axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/goals`)
             .then(res => {
                 setGoals(res.data.goals)
                 setTags(res.data.tags)
@@ -53,7 +53,7 @@ function AddGoalForm(props) {
 
     const addGoal = e => {
         e.preventDefault();
-        axios.post(`http${process.env.DOMAIN}/api/goals`, {
+        axios.post(`https://${process.env.REACT_APP_DOMAIN}/api/goals`, {
             name: goalName,
             description: description,
             org_id: localStorage.getItem("orgId"),

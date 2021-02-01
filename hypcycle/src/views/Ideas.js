@@ -20,7 +20,7 @@ function Ideas () {
     }
 
     useEffect(() => {
-        Axios.get(`http${process.env.DOMAIN}/api/goals/${localStorage.getItem("orgId")}`)
+        Axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/goals/${localStorage.getItem("orgId")}`)
             .then(function(res){
                 setGoals(res.data.goals)
             })
@@ -30,7 +30,7 @@ function Ideas () {
     }, [])
 
     useEffect(() => {
-        Axios.get(`http${process.env.DOMAIN}/api/ideas/${localStorage.getItem("orgId")}`)
+        Axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/ideas/${localStorage.getItem("orgId")}`)
             .then(function(res) {
                 setIdeas(res.data.ideas)
                 setTimeout(stopLoading, 1000)

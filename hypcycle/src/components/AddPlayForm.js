@@ -11,7 +11,7 @@ function AddPlayForm(props) {
     const [playbook, setPlaybook] = useState()
 
     useEffect(() => {
-        axios.get(`http${process.env.DOMAIN}/api/playbooks/${localStorage.getItem("orgId")}`)
+        axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/playbooks/${localStorage.getItem("orgId")}`)
             .then(res => {
                 setPlaybooks(res.data.playbooks)
                 setPlaybook(res.data.playbooks[0])
@@ -20,7 +20,7 @@ function AddPlayForm(props) {
     }, [])
 
     const addPlay = () => {
-        axios.post(`http${process.env.DOMAIN}/api/plays`, {
+        axios.post(`https://${process.env.REACT_APP_DOMAIN}/api/plays`, {
             name: name,
             description: description,
             playbook_id: playbook.id,

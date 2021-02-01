@@ -33,7 +33,7 @@ function Login () {
     }
 
     const getOrgs = userId => {
-        axios.get(`http${process.env.DOMAIN}/api/users/orgUser/${userId}`)
+        axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/users/orgUser/${userId}`)
             .then(function(res) {
                 setOrgs(res.data.orgUsers);
             })
@@ -45,7 +45,7 @@ function Login () {
         event.preventDefault()
         setSpin(true)
         setError(false)
-        axios.post( `http${process.env.DOMAIN}/api/auth/login`, {
+        axios.post( `https://${process.env.REACT_APP_DOMAIN}/api/auth/login`, {
                 email: email,
                 password: password
             })

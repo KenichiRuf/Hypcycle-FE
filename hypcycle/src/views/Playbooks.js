@@ -19,7 +19,7 @@ function Playbooks () {
     const toggleAddPlaybookModal = () => setAddPlaybookModal(!addPlaybookModal)
 
     useEffect(() => {
-        Axios.get(`http${process.env.DOMAIN}/api/playbooks/${localStorage.getItem("orgId")}`)
+        Axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/playbooks/${localStorage.getItem("orgId")}`)
             .then(res => {
                 setPlaybooks(res.data.playbooks)
                 setTimeout(stopLoading, 1000)

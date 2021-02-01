@@ -10,7 +10,7 @@ function AddUserForm(props) {
 
     const addUser = e => {
         e.preventDefault()
-        axios.post(`http${process.env.DOMAIN}/api/users/${localStorage.getItem("orgId")}`, {
+        axios.post(`https://${process.env.REACT_APP_DOMAIN}/api/users/${localStorage.getItem("orgId")}`, {
             email: email
         })
         .then(res => {

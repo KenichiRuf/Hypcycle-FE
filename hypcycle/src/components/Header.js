@@ -19,13 +19,13 @@ function Header () {
     const [redirectDashboard, setRedirectDashboard] = useState(false)
 
     useEffect(() => {
-        axios.get(`http${process.env.DOMAIN}/api/users/${localStorage.getItem("userId")}`)
+        axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/users/${localStorage.getItem("userId")}`)
             .then(res => setUser(res.data.user))
             .catch(err => console.log(err))
-        axios.get(`http${process.env.DOMAIN}/api/orgs/${localStorage.getItem("orgId")}`)
+        axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/orgs/${localStorage.getItem("orgId")}`)
             .then(res => setOrg(res.data.org.name))
             .catch(err => console.log(err))
-        axios.get(`http${process.env.DOMAIN}/api/users/orgUser/${localStorage.getItem("userId")}`)
+        axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/users/orgUser/${localStorage.getItem("userId")}`)
             .then(res => setOrgUsers(res.data.orgUsers))
             .catch(err => console.log(err))
     }, [orgName])

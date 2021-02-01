@@ -17,7 +17,7 @@ function UpdateExperimentForm(props) {
 
     const updateExperiment = e => {
         e.preventDefault();
-        axios.put(`http${process.env.DOMAIN}/api/experiments/${props.experiment.id}`, {
+        axios.put(`https://${process.env.REACT_APP_DOMAIN}/api/experiments/${props.experiment.id}`, {
             trials: trials,
             successes: successes
         })

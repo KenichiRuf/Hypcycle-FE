@@ -17,7 +17,7 @@ const IdeaList = (props) => {
 
         props.setIdeas(items);
         
-        axios.put(`http${process.env.DOMAIN}/api/ideas/move`, {
+        axios.put(`https://${process.env.REACT_APP_DOMAIN}/api/ideas/move`, {
             idea: reorderedItem,
             reference: reference,
             head: result.destination.index === 0 ? true : false

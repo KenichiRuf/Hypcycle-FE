@@ -18,7 +18,7 @@ function Goals () {
     }
 
     useEffect(() => {
-        Axios.get(`http${process.env.DOMAIN}/api/goals/${localStorage.getItem("orgId")}`)
+        Axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/goals/${localStorage.getItem("orgId")}`)
             .then(function(res){
                 setGoalList(res.data.goals)
                 setTimeout(stopLoading, 1000)
