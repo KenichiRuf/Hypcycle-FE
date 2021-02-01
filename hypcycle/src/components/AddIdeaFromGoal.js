@@ -17,7 +17,7 @@ function AddIdeaFromGoal(props) {
     }
 
     useEffect(() => {
-        axios.get(`${process.env.DOMAIN}/api/ideas/${localStorage.getItem("orgId")}`)
+        axios.get(`http${process.env.DOMAIN}/api/ideas/${localStorage.getItem("orgId")}`)
             .then(function(res) {
                 setIdeas(res.data.ideas)
             })
@@ -26,7 +26,7 @@ function AddIdeaFromGoal(props) {
 
     const addIdea = e => {
         e.preventDefault();
-        axios.post(`${process.env.DOMAIN}/api/ideas`, {
+        axios.post(`http${process.env.DOMAIN}/api/ideas`, {
             name: ideaName,
             goal_id: goal.id,
             org_id: localStorage.getItem("orgId"),

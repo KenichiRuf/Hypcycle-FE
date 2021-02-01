@@ -26,7 +26,7 @@ function AddExperimentForm(props) {
 
     const addExperiment = e => {
         e.preventDefault();
-        axios.post(`${process.env.DOMAIN}/api/experiments`, {
+        axios.post(`http${process.env.DOMAIN}/api/experiments`, {
             ...props.experiment,
             name: name,
             description: description,

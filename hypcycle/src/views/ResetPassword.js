@@ -33,7 +33,7 @@ const ResetPassword = props => {
     }
 
     const getOrgs = userId => {
-        axios.get(`${process.env.DOMAIN}/api/users/orgUser/${userId}`)
+        axios.get(`http${process.env.DOMAIN}/api/users/orgUser/${userId}`)
             .then(function(res) {
                 setOrgs(res.data.orgUsers);
             })
@@ -46,7 +46,7 @@ const ResetPassword = props => {
         event.preventDefault();
         setError("");
         if(newPassword === confirmPassword) {
-            axios.put(`${process.env.DOMAIN}/api/users/password/${props.match.params.userId}`, {
+            axios.put(`http${process.env.DOMAIN}/api/users/password/${props.match.params.userId}`, {
                 password: newPassword
             })
             .then(res => {
@@ -61,7 +61,7 @@ const ResetPassword = props => {
     const login = event => {
         event.preventDefault()
         if(match) {
-            axios.post( `${process.env.DOMAIN}/api/auth/login`, {
+            axios.post( `http${process.env.DOMAIN}/api/auth/login`, {
                 email: props.match.params.email,
                 password: props.match.params.password
             })

@@ -15,7 +15,7 @@ function Experiments () {
     const stopLoading = () => setLoading(false)
     
     useEffect(() => {
-        axios.get(`${process.env.DOMAIN}/api/experiments/${localStorage.getItem("orgId")}`)
+        axios.get(`http${process.env.DOMAIN}/api/experiments/${localStorage.getItem("orgId")}`)
             .then(function(res) {
                 setExperiments(res.data.experiments)
                 setTimeout(stopLoading, 1000)

@@ -49,7 +49,7 @@ function Registration () {
         event.preventDefault()
         setError("")
         if(password === confirmPassword) {
-            axios.post( `${process.env.DOMAIN}/api/auth/register`, {
+            axios.post( `http${process.env.DOMAIN}/api/auth/register`, {
                 first_name: firstName,
                 last_name: lastName,
                 email: email,
