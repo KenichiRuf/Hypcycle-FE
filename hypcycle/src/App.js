@@ -13,8 +13,12 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 import PlaybookView from './views/PlaybookView';
 import ResetPassword from './views/ResetPassword';
+import axios from 'axios';
 
 function App() {
+
+  axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*"
+  
   return (
     <Router>
       <Route exact path="/" component={Home} />
