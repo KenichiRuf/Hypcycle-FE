@@ -18,7 +18,13 @@ import axios from 'axios';
 function App() {
 
   axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*"
-  axios.defaults.baseURL = process.env.REACT_APP_DOMAIN
+
+  if(process.env.REACT_APP_DOMAIN === "local") {
+    axios.defaults.baseURL = "http://localhost:4000"
+  } else {
+    axios.defaults.baseURL = "https://hypcycle.herokuapp.com"
+  }
+  
   
   return (
     <Router>

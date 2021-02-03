@@ -1,6 +1,7 @@
 import React from 'react'
 import Experiment from './Experiment';
 import {Button} from 'reactstrap';
+import {Link} from 'react-router-dom';
 
 const ExperimentList = (props) => {
       
@@ -9,7 +10,7 @@ const ExperimentList = (props) => {
             {props.experiments.length === 0
             ? <div>
                 <p>You haven't started any experiments yet.</p>
-                <a href="/experiments"><Button>Create Experiment</Button></a>
+                <Link to="/experiments"><Button>Create Experiment</Button></Link>
             </div>
             : props.experiments.map(experiment =>
                 <li>

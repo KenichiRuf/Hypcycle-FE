@@ -6,6 +6,7 @@ import {Modal} from "reactstrap";
 import AddOrgForm from "./AddOrgForm";
 import {Redirect} from "react-router";
 import Org from "./Org";
+import {Link} from 'react-router-dom';
 
 function Header () {
 
@@ -56,7 +57,7 @@ function Header () {
     
     return(
         <div className="app-header">
-            <a href="/dashboard" className="header-logo"><img src={logo} className="header-logo-image" alt="hypcycle logo"/></a>
+            <Link to="/dashboard" className="header-logo"><img src={logo} className="header-logo-image" alt="hypcycle logo"/></Link>
             <div className="app-header-user-block">
                 <div className="app-header-user-block-text">
                     {user.first_name ? <h2>{user.first_name} {user.last_name}</h2>
