@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Nav, NavItem, NavLink} from "reactstrap";
 import icon from "../assets/hypcycle-icon.png";
+import {Link} from 'react-router-dom';
 
 function Sidebar () {
 
@@ -16,28 +17,28 @@ function Sidebar () {
                 </div>
                 <Nav className="sidebar-items">
                     <NavItem className="sidebar-item">
-                        <a href="/dashboard"><img alt="home" src="https://img.icons8.com/ios-filled/30/000000/home.png"/></a>
+                        <Link to="/dashboard"><img alt="home" src="https://img.icons8.com/ios-filled/30/000000/home.png"/></Link>
                     </NavItem>
                     <NavItem className="sidebar-item">
-                    <a href="/goals"><img alt="goals" src="https://img.icons8.com/ios-filled/30/000000/goal.png"/></a>
+                    <Link to="/goals"><img alt="goals" src="https://img.icons8.com/ios-filled/30/000000/goal.png"/></Link>
                     </NavItem>
                     <NavItem className="sidebar-item">
-                        <a href="/ideas"><img alt="ideas" src="https://img.icons8.com/android/30/000000/idea.png"/></a>
+                        <Link to="/ideas"><img alt="ideas" src="https://img.icons8.com/android/30/000000/idea.png"/></Link>
                     </NavItem>
                     <NavItem className="sidebar-item">
-                        <a href="/experiments"><img alt="experiments" src="https://img.icons8.com/ios-filled/30/000000/thin-test-tube.png"/></a>
+                        <Link to="/experiments"><img alt="experiments" src="https://img.icons8.com/ios-filled/30/000000/thin-test-tube.png"/></Link>
                     </NavItem>
                     {/* <NavItem className="sidebar-item">
-                        <a href="/playbooks"><img alt="playbooks" src="https://img.icons8.com/ios-filled/30/000000/strategy-board.png"/></a>
+                        <Link to="/playbooks"><img alt="playbooks" src="https://img.icons8.com/ios-filled/30/000000/strategy-board.png"/></Link>
                     </NavItem> */}
                     <NavItem className="sidebar-item">
-                        <a href="/users"><img alt="users" src="https://img.icons8.com/ios-filled/30/000000/user-group-man-man.png"/></a>
+                        <Link to="/users"><img alt="users" src="https://img.icons8.com/ios-filled/30/000000/user-group-man-man.png"/></Link>
                     </NavItem>
                 </Nav>
             </div>
             <div className={open ? "sidebar-labels" : "hide"}>
                 <div className="sidebar-labels-header">
-                    <a href="/" className={open ? "sidebar-logo" : "hide"}><img src={icon} className="logo-image" alt="hypcycle logo"/></a>
+                    <Link to="/" className={open ? "sidebar-logo" : "hide"}><img src={icon} className="logo-image" alt="hypcycle logo"/></Link>
                 </div>
                 <Nav className="sidebar-labels-items">
                     <NavItem className="sidebar-item">

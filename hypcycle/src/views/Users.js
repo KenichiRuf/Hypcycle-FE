@@ -16,7 +16,7 @@ function Users () {
     const toggleAddUserModal = () => setAddUserModal(!addUserModal)
 
     useEffect(() => {
-        axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/users/orgUsers/${localStorage.getItem("orgId")}`)
+        axios.get(`/api/users/orgUsers/${localStorage.getItem("orgId")}`)
             .then(res => setUsers(res.data.orgUsers))
             .catch(err => console.log(err))
     }, [])

@@ -5,7 +5,7 @@ import axios from 'axios';
 import DoubleCheckMark from '../assets/icons/DoubleCheckMark';
 import XCircle from '../assets/icons/XCircle';
 import Navigation from '../components/Navigation';
-
+import {Link} from 'react-router-dom';
 
 function Registration () {
     const [firstName,setFirstName] = useState()
@@ -49,7 +49,7 @@ function Registration () {
         event.preventDefault()
         setError("")
         if(password === confirmPassword) {
-            axios.post( `https://${process.env.REACT_APP_DOMAIN}/api/auth/register`, {
+            axios.post( `/api/auth/register`, {
                 first_name: firstName,
                 last_name: lastName,
                 email: email,
@@ -97,7 +97,7 @@ function Registration () {
                 </div>
                 <Button className="registration-button">Create Account</Button>
                 {error ? <p>{error}</p> : null}
-                <p className="login-here">Already have an account? <a href="/login">Login here.</a></p>
+                <p className="login-here">Already have an account? <Link to="/login">Login here.</Link></p>
             </Form>
             {registered ? <Redirect to="/login" /> : null}
         </div>

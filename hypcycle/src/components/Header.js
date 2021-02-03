@@ -6,6 +6,7 @@ import {Modal} from "reactstrap";
 import AddOrgForm from "./AddOrgForm";
 import {Redirect} from "react-router";
 import Org from "./Org";
+import {Link} from 'react-router-dom';
 
 function Header () {
 
@@ -19,13 +20,13 @@ function Header () {
     const [redirectDashboard, setRedirectDashboard] = useState(false)
 
     useEffect(() => {
-        axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/users/${localStorage.getItem("userId")}`)
+        axios.get(`/api/users/${localStorage.getItem("userId")}`)
             .then(res => setUser(res.data.user))
             .catch(err => console.log(err))
-        axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/orgs/${localStorage.getItem("orgId")}`)
+        axios.get(`/api/orgs/${localStorage.getItem("orgId")}`)
             .then(res => setOrg(res.data.org.name))
             .catch(err => console.log(err))
-        axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/users/orgUser/${localStorage.getItem("userId")}`)
+        axios.get(`/api/users/orgUser/${localStorage.getItem("userId")}`)
             .then(res => setOrgUsers(res.data.orgUsers))
             .catch(err => console.log(err))
     }, [orgName])
@@ -56,7 +57,7 @@ function Header () {
     
     return(
         <div className="app-header">
-            <a href="/dashboard" className="header-logo"><img src={logo} className="header-logo-image" alt="hypcycle logo"/></a>
+            <Link to="/dashboard" className="header-logo"><img src={logo} className="header-logo-image" alt="hypcycle logo"/></Link>
             <div className="app-header-user-block">
                 <div className="app-header-user-block-text">
                     {user.first_name ? <h2>{user.first_name} {user.last_name}</h2>

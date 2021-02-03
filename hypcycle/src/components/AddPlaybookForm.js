@@ -7,7 +7,7 @@ function AddPlaybookForm(props) {
     const [name, setName] = useState("")
 
     const addPlaybook = () => {
-        axios.post(`https://${process.env.REACT_APP_DOMAIN}/api/playbooks`, {
+        axios.post(`/api/playbooks`, {
             name: name,
             org_id: localStorage.getItem("orgId"),
             owner_id: localStorage.getItem("userId")

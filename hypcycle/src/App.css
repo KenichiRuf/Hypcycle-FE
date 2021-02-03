@@ -295,6 +295,10 @@
   min-width: 108px;
 }
 
+.org:hover {
+  cursor: pointer;
+}
+
 .forgot-password {
   margin-top: 10px;
 }

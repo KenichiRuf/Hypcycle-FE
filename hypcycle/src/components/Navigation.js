@@ -14,10 +14,10 @@ function Navigation () {
                     <NavLink href="https://www.hypcycle.com/blog" className="navigation-link">Blog</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink href="/#/login" className="navigation-link">Login</NavLink>
+                    <NavLink to="/login" className="navigation-link">Login</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink href="/#/register" className="navigation-link navigation-last">Sign Up</NavLink>
+                    <NavLink to="/register" className="navigation-link navigation-last">Sign Up</NavLink>
                 </NavItem>
             </Nav>
         </div>

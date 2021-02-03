@@ -5,7 +5,7 @@ import {Button, Spinner} from 'reactstrap';
 import FilterIcon from '../assets/icons/FilterIcon';
 import ExperimentList from '../components/ExperimentList';
 import axios from 'axios';
-
+import {Link} from 'react-router-dom';
 
 function Experiments () {
 
@@ -15,7 +15,7 @@ function Experiments () {
     const stopLoading = () => setLoading(false)
     
     useEffect(() => {
-        axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/experiments/${localStorage.getItem("orgId")}`)
+        axios.get(`/api/experiments/${localStorage.getItem("orgId")}`)
             .then(function(res) {
                 setExperiments(res.data.experiments)
                 setTimeout(stopLoading, 1000)
@@ -43,7 +43,7 @@ function Experiments () {
                             {experiments.length === 0
                             ? <div>
                                 <p>You don't have any active experiments. Create an Experiment from one of your ideas.</p>
-                                <a href="/ideas">{"Go to Ideas ->"}</a>
+                                <Link to="/ideas">{"Go to Ideas ->"}</Link>
                             </div>
                             : <ExperimentList experiments={experiments}/>
                             }

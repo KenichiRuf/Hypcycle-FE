@@ -4,7 +4,7 @@ import {Redirect} from 'react-router';
 import axios from 'axios';
 import Navigation from '../components/Navigation';
 import Org from "../components/Org";
-
+import {Link} from 'react-router-dom';
 
 function Login () {
     const [email, setEmail] = useState()
@@ -33,7 +33,7 @@ function Login () {
     }
 
     const getOrgs = userId => {
-        axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/users/orgUser/${userId}`)
+        axios.get(`/api/users/orgUser/${userId}`)
             .then(function(res) {
                 setOrgs(res.data.orgUsers);
             })
@@ -45,7 +45,7 @@ function Login () {
         event.preventDefault()
         setSpin(true)
         setError(false)
-        axios.post( `https://${process.env.REACT_APP_DOMAIN}/api/auth/login`, {
+        axios.post( `/api/auth/login`, {
                 email: email,
                 password: password
             })
@@ -79,10 +79,11 @@ function Login () {
                     </FormGroup>
                 </div>
                 {spin ? <Spinner color="dark" /> : success ? <p>Login Successful!</p> :<Button className="login-button">Login</Button>}
-                <p className="forgot-password"><a href="/forgot-password">Forgot Password?</a></p>
+                <p className="forgot-password"><Link to="/forgot-password">Forgot Password?</Link></p>
                 {error ? <p className="error-message">{error}</p> : null}
             </Form>
             <Modal isOpen={modal} toggle={toggle}>
+                <h3>Choose An Org:</h3>
                 <div className="org-list">
                     {orgs.map(org => <Org name={org.name} id={org.id} chooseOrg={chooseOrg}/>)}
                 </div>

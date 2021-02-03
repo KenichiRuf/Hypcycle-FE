@@ -10,7 +10,7 @@ import {Spinner, Button} from 'reactstrap';
 import ExperimentList from '../components/ExperimentList';
 import DashboardGoalChart from '../components/DashboardGoalChart';
 import DashboardIdeaChart from '../components/DashboardIdeaChart';
-
+import {Link} from 'react-router-dom';
 
 function Dashboard () {
 
@@ -21,7 +21,7 @@ function Dashboard () {
     const [dashboardGoals, setDashboardGoals] = useState([])
 
     useEffect(() => {
-        axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/dashboard/${localStorage.getItem("orgId")}`)
+        axios.get(`/api/dashboard/${localStorage.getItem("orgId")}`)
             .then(function(res) {
                 setExperiments(res.data.data.experiments)
                 setGoals(res.data.data.goals)
@@ -57,7 +57,7 @@ function Dashboard () {
                                 {goals.length === 0
                                 ? <div>
                                     <p>You haven't set any goals yet.</p>
-                                    <a href="/goals"><Button>Create Goals</Button></a>
+                                    <Link to="/goals"><Button>Create Goals</Button></Link>
                                 </div>
                                 : dashboardGoals.map(goal => <DashboardGoalChart goal={goal} />)}
                             </div>
@@ -67,7 +67,7 @@ function Dashboard () {
                             {ideas.length === 0
                                 ? <div>
                                     <p>You haven't created any ideas yet.</p>
-                                    <a href="/ideas"><Button>Create Ideas</Button></a>
+                                    <Link to="/ideas"><Button>Create Ideas</Button></Link>
                                 </div>
                                 : <DashboardIdeaChart ideas={ideas} />}
                         </div>
