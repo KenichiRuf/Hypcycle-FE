@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from "../assets/logo.png";
-import {Nav, NavItem, NavLink} from "reactstrap";
+import {Nav, NavItem} from "reactstrap";
+import {NavLink} from "react-router-dom";
 
 function Navigation () {
     return(
