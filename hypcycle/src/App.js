@@ -18,6 +18,7 @@ import axios from 'axios';
 function App() {
 
   axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*"
+  axios.defaults.baseURL = process.env.REACT_APP_DOMAIN
   
   return (
     <Router>

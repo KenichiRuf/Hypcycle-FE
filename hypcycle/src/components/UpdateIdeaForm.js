@@ -13,7 +13,7 @@ function UpdateIdeaForm(props) {
 
     const updateGoal = e => {
         e.preventDefault();
-        axios.put(`https://${process.env.REACT_APP_DOMAIN}/api/goals/${props.goal.id}`, {
+        axios.put(`/api/goals/${props.goal.id}`, {
             current_value: current,
         })
         .then(function(res) {

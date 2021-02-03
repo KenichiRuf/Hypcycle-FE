@@ -10,7 +10,7 @@ function AddOrgForm(props) {
 
     const addOrg = e => {
         e.preventDefault()
-        axios.post(`https://${process.env.REACT_APP_DOMAIN}/api/orgs/${localStorage.getItem("userId")}`, {
+        axios.post(`/api/orgs/${localStorage.getItem("userId")}`, {
             name: name
         })
         .then(res => {

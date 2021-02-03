@@ -43,13 +43,13 @@ function Goal(props) {
     }, [props.goal.current_value, props.goal.goal_value, props.goal.start_value, pace])
 
     useEffect(() => {
-        axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/ideas/goal/${props.goal.id}`)
+        axios.get(`/api/ideas/goal/${props.goal.id}`)
             .then(res => setIdeas(res.data.ideas.length))
             .catch(err => console.log(err))
     }, [props.goal.id])
 
     useEffect(() => {
-        axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/experiments/goal/${props.goal.id}`)
+        axios.get(`/api/experiments/goal/${props.goal.id}`)
             .then(res => setExperiments(res.data.experiments.length))
             .catch(err => console.log(err))
     }, [props.goal.id])

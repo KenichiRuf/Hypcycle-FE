@@ -21,7 +21,7 @@ function Dashboard () {
     const [dashboardGoals, setDashboardGoals] = useState([])
 
     useEffect(() => {
-        axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/dashboard/${localStorage.getItem("orgId")}`)
+        axios.get(`/api/dashboard/${localStorage.getItem("orgId")}`)
             .then(function(res) {
                 setExperiments(res.data.data.experiments)
                 setGoals(res.data.data.goals)

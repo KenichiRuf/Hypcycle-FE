@@ -22,7 +22,7 @@ function AddIdeaForm(props) {
     }
 
     useEffect(() => {
-        axios.get(`https://${process.env.REACT_APP_DOMAIN}/api/ideas`)
+        axios.get(`/api/ideas`)
         .then(res => {
             console.log(res)
             setIdeas(res.data.ideas)
@@ -35,7 +35,7 @@ function AddIdeaForm(props) {
 
     const addIdea = e => {
         e.preventDefault();
-        axios.post(`https://${process.env.REACT_APP_DOMAIN}/api/ideas`, {
+        axios.post(`/api/ideas`, {
             name: ideaName,
             goal_id: goal.id,
             org_id: localStorage.getItem("orgId"),
