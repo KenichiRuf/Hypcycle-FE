@@ -3,7 +3,6 @@ import logo from "../assets/logo.png";
 import Avatar from "../components/Avatar";
 import axios from "axios";
 import {Modal} from "reactstrap";
-import AddOrgForm from "./AddOrgForm";
 import {Redirect} from "react-router";
 import Org from "./Org";
 import {Link} from 'react-router-dom';
@@ -12,12 +11,10 @@ function Header () {
 
     const [user, setUser] = useState("")
     const [orgName, setOrg] = useState("")
-    const [addOrgModal, setAddOrgModal] = useState(false)
     const [redirect, setRedirect] = useState(false)
     const [showDropdown, setShowDropdown] = useState(false)
     const [orgUsers, setOrgUsers] = useState([])
     const [switchOrgModal, setSwitchOrgModal] = useState(false)
-    const [redirectDashboard, setRedirectDashboard] = useState(false)
 
     useEffect(() => {
         axios.get(`/api/users/${localStorage.getItem("userId")}`)
@@ -31,13 +28,9 @@ function Header () {
             .catch(err => console.log(err))
     }, [orgName])
 
-    const toggleAddOrg = () => setAddOrgModal(!addOrgModal)
-
     const toggleSwitchOrg = () => setSwitchOrgModal(!switchOrgModal)
 
     const toggleDropdown = () => setShowDropdown(!showDropdown)
-
-    const onAddOrgClosed = () => setShowDropdown(false)
 
     const onSwitchOrgClosed = () => setShowDropdown(false)
 
@@ -45,7 +38,6 @@ function Header () {
         localStorage.setItem("orgId", orgId)
         setSwitchOrgModal(false)
         setShowDropdown(false)
-        setRedirectDashboard(true)
     }
 
     const logout = () => {
@@ -70,12 +62,9 @@ function Header () {
             <div className={showDropdown ? "profile-dropdown" : "hide"}>
                 {orgUsers.length > 1 ? <p className="switch-org" onClick={toggleSwitchOrg}>Switch Org</p>
                 : null}
-                <p className="create-new-org" onClick={toggleAddOrg}>Create New Org</p>
+                <Link to="/new-org"><p className="create-new-org">Create New Org</p></Link>
                 <p className="logout" onClick={logout}>Logout</p>
             </div>
-            <Modal isOpen={addOrgModal} toggle={toggleAddOrg} onClosed={onAddOrgClosed}>
-                <AddOrgForm />
-            </Modal>
             <Modal isOpen={switchOrgModal} toggle={toggleSwitchOrg} onClosed={onSwitchOrgClosed}>
                 <h2>Choose Org:</h2>
                 <div className="org-list">
@@ -83,7 +72,6 @@ function Header () {
                 </div>
             </Modal>
             {redirect ? <Redirect to='/login'/> : null}
-            {redirectDashboard ? <Redirect to='/dashboard'/> : null}
         </div>
     )
 }

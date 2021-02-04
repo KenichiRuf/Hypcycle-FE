@@ -10,14 +10,19 @@ function AddUserForm(props) {
 
     const addUser = e => {
         e.preventDefault()
-        axios.post(`/api/users/${localStorage.getItem("orgId")}`, {
-            email: email
-        })
-        .then(res => {
-            props.setUsers([...props.users, res.data.orgUser])
-            setMessage("Invite Successful!")
-        })
-        .catch(err => setMessage("Invite Failed"))
+        if(email.length === 0) {
+            setMessage("Must Enter An Email Address")
+        } else {
+            axios.post(`/api/users/${localStorage.getItem("orgId")}`, {
+                email: email,
+                orgId: localStorage.getItem("orgId")
+            })
+            .then(res => {
+                props.setUsers([...props.users, res.data.orgUser])
+                setMessage("Invite Successful!")
+            })
+            .catch(err => setMessage("Invite Failed"))
+        }
     }
 
     const changeEmailHandler = e => setEmail(e.target.value)

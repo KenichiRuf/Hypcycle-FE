@@ -144,15 +144,12 @@
   color: #161925;
   font-size: 16px;
   border-right: 1px solid #161925;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
 .navigation-last {
   border-right: none;
-}
-
-.nav-link {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
 }
 
 /* Sidebar */

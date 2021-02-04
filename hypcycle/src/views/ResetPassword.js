@@ -5,18 +5,19 @@ import DoubleCheckMark from '../assets/icons/DoubleCheckMark';
 import XCircle from '../assets/icons/XCircle';
 import {Redirect} from 'react-router';
 import Org from "../components/Org";
-
+import Navigation from "../components/Navigation";
 
 const ResetPassword = props => {
     const [newPassword, setNewPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const [match, setMatch] = useState(true)
-    const [loggedIn, setLoggedIn] = useState(false)
+    const [redirect, setRedirect] = useState(false)
     const [error, setError] = useState("")
     const [modal, setModal] = useState(false)
     const [orgs, setOrgs] = useState([])
     const [spin, setSpin] = useState(false)
     const [success, setSuccess] = useState(false)
+    const [password, setPassword] = useState(props.match.params.password)
 
     const changeNewPasswordHandler = e => {
         setNewPassword(e.target.value)
@@ -29,55 +30,47 @@ const ResetPassword = props => {
 
     const chooseOrg = orgId => {
         localStorage.setItem("orgId", orgId)
-        setLoggedIn(true)
+        setRedirect(true)
     }
 
     const getOrgs = userId => {
         axios.get(`/api/users/orgUser/${userId}`)
             .then(function(res) {
+                console.log(res.data.orgUsers)
                 setOrgs(res.data.orgUsers);
             })
             .catch(function(err) {setError(err)});
-        setModal(true);
     }
 
-    const resetPassword = event => {
-        console.log("reset")
-        event.preventDefault();
+    const resetPassword = () => {
         setError("");
         if(newPassword === confirmPassword) {
             axios.put(`/api/users/password/${props.match.params.userId}`, {
                 password: newPassword
             })
             .then(res => {
-                setLoggedIn(true);
                 setSpin(false);
                 setSuccess(true);
+                setModal(true);
             })
             .catch(err => setError(err.message))
         }
     }
 
-    const login = event => {
-        event.preventDefault()
-        if(match) {
-            axios.post( `/api/auth/login`, {
-                email: props.match.params.email,
-                password: props.match.params.password
-            })
-            .then(res => {
-                localStorage.setItem("userId", res.data.userId)
-                getOrgs(res.data.userId)
-                localStorage.setItem("token", res.data.token);
-                resetPassword()
-            })
-            .catch(err => {
-                setSpin(false);
-                setError("Login Failed");
-            })
-        } else {
-            setError("Passwords Do Not Match")
-        }
+    const login = pw => {
+        axios.post(`/api/auth/login`, {
+            email: props.match.params.email,
+            password: pw
+        })
+        .then(res => {
+            localStorage.setItem("userId", res.data.userId)
+            localStorage.setItem("token", res.data.token)
+            getOrgs(res.data.userId)
+        })
+        .catch(err => {
+            setSpin(false);
+            setError("Login Failed");
+        })
     }
 
     useEffect(() => {
@@ -88,26 +81,37 @@ const ResetPassword = props => {
         }
     }, [confirmPassword, newPassword])
 
+    useEffect(() => {
+        login(password)
+    }, [orgs])
+
     return(
-        <div>
-            <Form onSubmit={login}>
-                <FormGroup>
-                    <Label for="new-password" className="registration-label">New Password</Label>
-                    <Input type="password" className="registration-input" id="new-password" onChange={changeNewPasswordHandler}/>
-                </FormGroup>
-                <FormGroup>
-                    <Label for="confirm-password" className="registration-label">Confirm New Password {match ? DoubleCheckMark : XCircle}</Label>
-                    <Input type="password" className="registration-input" id="confirm-password" onChange={changeConfirmPasswordHandler}/>
-                </FormGroup>
-                {spin ? <Spinner color="dark" /> : success ? <p>Login Successful!</p> :<Button className="update-password-button">Update Password</Button>}
-                {error ? <p>{error}</p> : null}
-            </Form>
-            <Modal isOpen={modal} toggle={toggle}>
-                <div className="org-list">
-                    {orgs.map(org => <Org org={org} chooseOrg={chooseOrg}/>)}
+        <div className="app-container">
+            <div className="app-content">
+                <Navigation />
+                <div className="view-container">
+                    <div>
+                        <Form onSubmit={resetPassword}>
+                            <FormGroup>
+                                <Label for="new-password" className="registration-label">New Password</Label>
+                                <Input type="password" className="registration-input" id="new-password" onChange={changeNewPasswordHandler}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="confirm-password" className="registration-label">Confirm New Password {match ? DoubleCheckMark : XCircle}</Label>
+                                <Input type="password" className="registration-input" id="confirm-password" onChange={changeConfirmPasswordHandler}/>
+                            </FormGroup>
+                            {spin ? <Spinner color="dark" /> : success ? <p>Login Successful!</p> :<Button className="update-password-button">Update Password</Button>}
+                            {error ? <p>{error}</p> : null}
+                        </Form>
+                        <Modal isOpen={modal} toggle={toggle}>
+                            <div className="org-list">
+                                {orgs.map(org => <Org org={org} chooseOrg={chooseOrg}/>)}
+                            </div>
+                        </Modal>
+                        {redirect ? <Redirect to="/dashboard" /> : null}
+                    </div>
                 </div>
-            </Modal>
-            {loggedIn ? <Redirect to="/dashboard" /> : null}
+            </div>
         </div>
     )
 }
