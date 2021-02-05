@@ -57,7 +57,7 @@ function AddGoalForm(props) {
             name: goalName,
             description: description,
             org_id: localStorage.getItem("orgId"),
-            owner_id: localStorage.getItem("userId"),
+            owner_id: localStorage.getItem("orgUserId"),
             start_value: current,
             current_value: current,
             goal_value: target,

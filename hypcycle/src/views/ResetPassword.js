@@ -6,7 +6,7 @@ import XCircle from '../assets/icons/XCircle';
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 
-const ResetPassword = props => {
+const ResetPassword = () => {
     const [newPassword, setNewPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const [match, setMatch] = useState(true)
@@ -25,7 +25,7 @@ const ResetPassword = props => {
         e.preventDefault()
         setError("");
         if(newPassword === confirmPassword) {
-            axios.put(`/api/users/password/${props.match.params.userId}`, {
+            axios.put(`/api/users/password/${localStorage.getItem("userId")}`, {
                 password: newPassword
             })
             .then(res => {

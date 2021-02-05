@@ -13,7 +13,7 @@ function Login () {
     const [error, setError] = useState(false)
     const [spin, setSpin] = useState(false)
     const [success, setSuccess] = useState(false)
-    const [orgs, setOrgs] = useState([])
+    const [orgUsers, setOrgUsers] = useState([])
     const [modal, setModal] = useState(false)
 
     const changeEmailHandler = e => {
@@ -27,15 +27,16 @@ function Login () {
     const toggle = () => setModal(!modal)
 
 
-    const chooseOrg = orgId => {
+    const chooseOrg = (orgId, orgUserId) => {
         localStorage.setItem("orgId", orgId)
+        localStorage.setItem("orgUserId", orgUserId)
         setLoggedIn(true)
     }
 
     const getOrgs = userId => {
         axios.get(`/api/users/orgUser/${userId}`)
             .then(function(res) {
-                setOrgs(res.data.orgUsers);
+                setOrgUsers(res.data.orgUsers);
             })
             .catch(function(err) {setError(err)});
         setModal(true);
@@ -88,7 +89,7 @@ function Login () {
                 }}>
                 <h3>Choose An Org:</h3>
                 <div className="org-list">
-                    {orgs.map(org => <Org name={org.name} id={org.id} chooseOrg={chooseOrg}/>)}
+                    {orgUsers.map(orgUser => <Org name={orgUser.name} orgUserId={orgUser.id} orgId={orgUser.org_id} chooseOrg={chooseOrg}/>)}
                 </div>
             </Modal>
             {loggedIn ? <Redirect to="/dashboard" /> : null}
