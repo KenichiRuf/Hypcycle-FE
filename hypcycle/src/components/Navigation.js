@@ -9,10 +9,10 @@ function Navigation () {
             <a href="https://www.hypcycle.com" className="navigation-logo"><img src={logo} className="logo-image" alt="hypcycle logo"/></a>
             <Nav className="navigation-items">
                 <NavItem>
-                    <NavLink href="https://www.hypcycle.com/about" className="navigation-link">About</NavLink>
+                    <a href="https://www.hypcycle.com/about" className="navigation-link">About</a>
                 </NavItem>
                 <NavItem>
-                    <NavLink href="https://www.hypcycle.com/blog" className="navigation-link">Blog</NavLink>
+                    <a href="https://www.hypcycle.com/blog" className="navigation-link">Blog</a>
                 </NavItem>
                 <NavItem>
                     <NavLink to="/login" className="navigation-link">Login</NavLink>

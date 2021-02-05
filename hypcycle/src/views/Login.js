@@ -82,7 +82,10 @@ function Login () {
                 <p className="forgot-password"><Link to="/forgot-password">Forgot Password?</Link></p>
                 {error ? <p className="error-message">{error}</p> : null}
             </Form>
-            <Modal isOpen={modal} toggle={toggle}>
+            <Modal isOpen={modal} toggle={toggle} onClosed={() => {
+                setSpin(false)
+                setSuccess(false)
+                }}>
                 <h3>Choose An Org:</h3>
                 <div className="org-list">
                     {orgs.map(org => <Org name={org.name} id={org.id} chooseOrg={chooseOrg}/>)}
