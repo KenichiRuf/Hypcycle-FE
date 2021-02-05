@@ -14,6 +14,7 @@ import PrivateRoute from './components/PrivateRoute';
 import PlaybookView from './views/PlaybookView';
 import ResetPassword from './views/ResetPassword';
 import CreateNewOrg from './views/CreateNewOrg';
+import Invite from './views/Invite';
 import axios from 'axios';
 
 function App() {
@@ -40,7 +41,8 @@ function App() {
       <PrivateRoute exact path="/users" component={Users} />
       <PrivateRoute exact path="/new-org" component={CreateNewOrg} />
       <PrivateRoute exact path="/playbooks/:id" render={props => <PlaybookView {...props}/>} />
-      <Route path="/reset-password/:email/:userId/:password" component={ResetPassword}/>
+      <Route exact path="/reset-password" component={ResetPassword}/>
+      <Route path="/invite/:email/:userId/:orgId/:password" component={Invite}/>
     </Router>
   );
 }
