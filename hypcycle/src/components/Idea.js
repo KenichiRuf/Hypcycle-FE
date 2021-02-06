@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Modal} from 'reactstrap';
-import UpdateIdeaForm from './UpdateIdeaForm';
+import EditIdeaForm from './EditIdeaForm';
 import Hamburger from '../assets/icons/Hamburger';
 import AddExperimentForm from './AddExperimentForm';
 
@@ -38,7 +38,7 @@ function Idea(props) {
                 </div>
             </div>
             <Modal isOpen={updateModal} toggle={updateToggle}>
-                <UpdateIdeaForm idea={props.idea} toggle={updateToggle} />
+                <EditIdeaForm idea={props.idea} toggle={updateToggle} />
             </Modal>
             <Modal isOpen={createExperimentModal} toggle={createExperimentToggle}>
                 <AddExperimentForm experiment={experiment} toggle={createExperimentToggle} />
