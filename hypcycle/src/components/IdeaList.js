@@ -29,8 +29,6 @@ const IdeaList = (props) => {
             console.log(err)
         })
     }
-
-    console.log(props.ideas)
       
     return(
         <DragDropContext onDragEnd={handleOnDragEnd}>

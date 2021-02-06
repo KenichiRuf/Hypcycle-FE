@@ -27,7 +27,7 @@ function Ideas () {
             .catch(function(err){
                 setTimeout(stopLoading, 1000)
             })
-    }, [])
+    }, [goals])
 
     useEffect(() => {
         Axios.get(`/api/ideas/${localStorage.getItem("orgId")}`)
@@ -38,7 +38,7 @@ function Ideas () {
             .catch(function(err){
                 setTimeout(stopLoading, 1000)
             })
-    }, [])
+    }, [ideas])
 
     const toggle = () => setModal(!modal)
 

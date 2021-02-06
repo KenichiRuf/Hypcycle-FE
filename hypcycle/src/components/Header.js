@@ -63,6 +63,8 @@ function Header () {
                 {orgUsers.length > 1 ? <p className="switch-org" onClick={toggleSwitchOrg}>Switch Org</p>
                 : null}
                 <Link to="/new-org"><p className="create-new-org">Create New Org</p></Link>
+                <Link to="/reset-password"><p>Reset Password</p></Link>
+                <Link to="/update-profile"><p>Update Profile</p></Link>
                 <p className="logout" onClick={logout}>Logout</p>
             </div>
             <Modal isOpen={switchOrgModal} toggle={toggleSwitchOrg} onClosed={onSwitchOrgClosed}>
