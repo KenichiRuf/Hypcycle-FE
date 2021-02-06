@@ -13,6 +13,7 @@ function AddIdeaForm(props) {
     const [ideaTags, setIdeaTags] = useState([])
     const [allIdeas, setAllIdeas] = useState([])
     const [filter, setFilter] = useState(new Set())
+    const [message, setMessage] = useState()
 
     const changeIdeaNameHandler = e => {
         setIdeaName(e.target.value)
@@ -24,13 +25,12 @@ function AddIdeaForm(props) {
     useEffect(() => {
         axios.get(`/api/ideas`)
         .then(res => {
-            console.log(res)
             setIdeas(res.data.ideas)
             setTags(res.data.tags)
             setIdeaTags(res.data.ideaTags)
             setAllIdeas(res.data.ideas)
         })
-        .catch(err => console.log(err))
+        .catch(err => setMessage(err))
     }, [])
 
     const addIdea = e => {
@@ -96,6 +96,7 @@ function AddIdeaForm(props) {
                         </select>
                     </FormGroup>
                     <Button>Add Idea</Button>
+                    {message ? <p>{message}</p> : null}
                 </Form>
             </div>
             <div className="idea-picker">
@@ -107,7 +108,7 @@ function AddIdeaForm(props) {
                     </div>
                 </div>
                 <div className="idea-picker-list">
-                    {ideas.map(idea => <div onClick={() => setIdeaName(idea.name)}>
+                    {ideas.map(idea => <div className="popular-idea" onClick={() => setIdeaName(idea.name)}>
                         <p>{idea.name}</p>
                     </div>)}
                 </div>
