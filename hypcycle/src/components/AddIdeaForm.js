@@ -39,7 +39,7 @@ function AddIdeaForm(props) {
             name: ideaName,
             goal_id: goal.id,
             org_id: localStorage.getItem("orgId"),
-            created_by: localStorage.getItem("userId"),
+            created_by: localStorage.getItem("orgUserId"),
             description: description,
             next: null,
             previous: null
