@@ -19,7 +19,7 @@ const UpdateProfile = () => {
                 setEmail(res.data.user.email)
             })
             .catch(err => setMessage(err))
-    })
+    }, [])
 
     const changeFirstNameHandler = e => {
         setFirstName(e.target.value)
