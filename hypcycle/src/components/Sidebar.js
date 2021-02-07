@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Nav, NavItem, Button} from "reactstrap";
+import {Nav, NavItem} from "reactstrap";
 import icon from "../assets/hypcycle-icon.png";
 import {Link} from 'react-router-dom';
 
