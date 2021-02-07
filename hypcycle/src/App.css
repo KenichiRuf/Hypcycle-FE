@@ -369,6 +369,10 @@
   text-align: center;
 }
 
+.radial-chart {
+  width: 100%;
+}
+
 .dashboard-idea-breakdown {
   display: flex;
   flex-direction: column;
