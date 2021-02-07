@@ -42,9 +42,6 @@ function Sidebar () {
                     <Link to="/users"><img alt="users" src="https://img.icons8.com/ios-filled/30/000000/user-group-man-man.png"/></Link>
                     <Link to="/users" className={open ? "sidebar-link sidebar-last" : "hide"}>Users</Link>
                 </NavItem>
-                <NavItem className="sidebar-item">
-                    <Button className={open ? "open-stuck-button" : "stuck-button"}>Help</Button>
-                </NavItem>
             </Nav>
         </div>
     )
