@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Nav, NavItem} from "reactstrap";
+import {Nav, NavItem, Button} from "reactstrap";
 import icon from "../assets/hypcycle-icon.png";
 import {Link} from 'react-router-dom';
 
@@ -20,27 +20,30 @@ function Sidebar () {
             <Nav className="sidebar-items">
                 <NavItem className="sidebar-item">
                     <Link to="/dashboard"><img alt="home" src="https://img.icons8.com/ios-filled/30/000000/home.png"/></Link>
-                    <Link href="/dashboard" className={open ? "sidebar-link" : "hide"}>Dashboard</Link>
+                    <Link to="/dashboard" className={open ? "sidebar-link" : "hide"}>Dashboard</Link>
                 </NavItem>
                 <NavItem className="sidebar-item">
                     <Link to="/goals"><img alt="goals" src="https://img.icons8.com/ios-filled/30/000000/goal.png"/></Link>
-                    <Link href="/goals" className={open ? "sidebar-link" : "hide"}>Goals</Link>
+                    <Link to="/goals" className={open ? "sidebar-link" : "hide"}>Goals</Link>
                 </NavItem>
                 <NavItem className="sidebar-item">
                     <Link to="/ideas"><img alt="ideas" src="https://img.icons8.com/android/30/000000/idea.png"/></Link>
-                    <Link href="/ideas" className={open ? "sidebar-link" : "hide"}>Ideas</Link>
+                    <Link to="/ideas" className={open ? "sidebar-link" : "hide"}>Ideas</Link>
                 </NavItem>
                 <NavItem className="sidebar-item">
                     <Link to="/experiments"><img alt="experiments" src="https://img.icons8.com/ios-filled/30/000000/thin-test-tube.png"/></Link>
-                    <Link href="/experiments" className={open ? "sidebar-link" : "hide"}>Experiments</Link>
+                    <Link to="/experiments" className={open ? "sidebar-link" : "hide"}>Experiments</Link>
                 </NavItem>
                 {/* <NavItem className="sidebar-item">
                     <Link to="/playbooks"><img alt="playbooks" src="https://img.icons8.com/ios-filled/30/000000/strategy-board.png"/></Link>
-                    <Link href="/playbooks" className={open ? "sidebar-link" : "hide"}>Playbooks</Link>
+                    <Link to="/playbooks" className={open ? "sidebar-link" : "hide"}>Playbooks</Link>
                 </NavItem> */}
                 <NavItem className="sidebar-item">
                     <Link to="/users"><img alt="users" src="https://img.icons8.com/ios-filled/30/000000/user-group-man-man.png"/></Link>
-                    <Link href="/users" className={open ? "sidebar-link sidebar-last" : "hide"}>Users</Link>
+                    <Link to="/users" className={open ? "sidebar-link sidebar-last" : "hide"}>Users</Link>
+                </NavItem>
+                <NavItem className="sidebar-item">
+                    <Button className={open ? "open-stuck-button" : "stuck-button"}>Help</Button>
                 </NavItem>
             </Nav>
         </div>

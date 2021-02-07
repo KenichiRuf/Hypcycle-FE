@@ -31,7 +31,7 @@
 
 .view-container {
   position: absolute;
-  left: 70px;
+  left: 60px;
   top: 80px;
   padding-left: 40px;
   padding-right: 25px;
@@ -43,7 +43,7 @@
 /* Header */
 .app-header {
   position: fixed;
-  left: 70px;
+  left: 60px;
   top: 0px;
   right: 0px;
   display: flex;
@@ -218,6 +218,13 @@
   color: #161925 !important;
   text-transform: uppercase;
   margin-left: 35px;
+}
+
+.stuck-button {
+  padding: 5px !important;
+  font-size: 12px !important;
+  background-color: #15e5e9 !important;
+  border: none !important;
 }
 
 /* Forms */
