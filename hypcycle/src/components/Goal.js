@@ -57,7 +57,7 @@ function Goal(props) {
     return(
         <div className={`goal ${status}`}>
             <div className="goal-left">
-                <h2 className="goal-name">{props.goal.metric}</h2>
+                <h2 className="goal-name">{props.goal.name}</h2>
                 <div className="goal-buttons">
                     <Button className="update-goal-button" onClick={() => setUpdateModal(true)}>Update</Button>
                     <Button className="add-idea-button" onClick={() => setAddIdeaModal(true)}>Add Idea</Button>
