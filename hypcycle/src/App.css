@@ -200,6 +200,7 @@
   min-height: 100vh;
   background-color: #f9f9f9;
   padding-left: 15px !important;
+  padding-right: 15px !important;
 }
 
 .sidebar-item {
@@ -221,10 +222,30 @@
 }
 
 .stuck-button {
-  padding: 5px !important;
-  font-size: 12px !important;
+  position: fixed;
+  bottom: 20px;
   background-color: #15e5e9 !important;
   border: none !important;
+  color: white !important;
+  width: 30px;
+  padding: 6px 0 !important;
+}
+
+.open-stuck-button {
+  position: fixed;
+  bottom: 20px;
+  background-color: #15e5e9 !important;
+  border: none !important;
+  color: white !important;
+  margin-left: 45px !important;
+  width: 120px;
+  padding: 6px 0 !important;
+}
+
+.open-stuck-button:hover {
+  background-color: #f9f9f9 !important;
+  color: #15e5e9 !important;
+  border: 1px solid #15e5e9 !important;
 }
 
 /* Forms */
