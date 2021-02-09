@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import axios from 'axios';
-
+import Mixpanel from '../functions/Mixpanel';
 
 function UpdateExperimentForm(props) {
 
@@ -22,6 +22,7 @@ function UpdateExperimentForm(props) {
             successes: successes
         })
         .then(function(res) {
+            Mixpanel.track("Experiment Update")
             props.toggle();
         })
         .catch(function(err) {console.log(err)})

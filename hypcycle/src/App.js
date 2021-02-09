@@ -27,8 +27,7 @@ function App() {
   } else {
     axios.defaults.baseURL = "https://hypcycle.herokuapp.com"
   }
-  
-  
+    
   return (
     <Router>
       <Route exact path="/" component={Home} />

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import axios from 'axios';
-
+import Mixpanel from '../functions/Mixpanel';
 
 function UpdateGoalForm(props) {
 
@@ -17,6 +17,7 @@ function UpdateGoalForm(props) {
             current_value: current,
         })
         .then(function(res) {
+            Mixpanel.track("Goal Update")
             props.toggle();
             props.update(current);
         })
