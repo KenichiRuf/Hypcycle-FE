@@ -1,5 +1,5 @@
 import React from 'react';
-import {Progress} from 'reactstrap';
+import {Progress, Button} from 'reactstrap';
 
 function ProgressBar(props) {
     const currentValue = props.current
@@ -20,6 +20,7 @@ function ProgressBar(props) {
                     <Progress bar striped className="bg-warning pace" value={pace - currentValue} max={goalValue-startValue} />
                     <Progress bar className="bg-white text-dark" value={goalValue - pace} max={goalValue-startValue} />
                 </Progress>
+                <Button className="update-goal-button" onClick={() => props.setUpdateModal(true)}>Update</Button>
             </div>
         )
     } else if(currentValue < goalValue) {
@@ -35,6 +36,7 @@ function ProgressBar(props) {
                     <Progress bar className="bg-info" value={currentValue-pace} max={goalValue-startValue} />
                     <Progress bar className="bg-white text-dark" value={goalValue - pace} max={goalValue-startValue} />
                 </Progress>
+                <Button className="update-goal-button" onClick={() => props.setUpdateModal(true)}>Update</Button>
             </div>
         )
     } else if(currentValue === goalValue) {
@@ -49,6 +51,7 @@ function ProgressBar(props) {
                     <Progress bar className="bg-info pace" value={pace - startValue} max={goalValue-startValue} />
                     <Progress bar className="bg-info" value={currentValue-pace} max={goalValue-startValue} />
                 </Progress>
+                <Button className="update-goal-button" onClick={() => props.setUpdateModal(true)}>Update</Button>
             </div>
         )
     } else {
@@ -64,6 +67,7 @@ function ProgressBar(props) {
                     <Progress bar className="progress-bar-goal bg-info" value={goalValue-pace} max={currentValue-startValue} />
                     <Progress bar className="bg-success" value={currentValue-goalValue} max={currentValue-startValue} animated/>
                 </Progress>
+                <Button className="update-goal-button" onClick={() => props.setUpdateModal(true)}>Update</Button>
             </div>
         )
     }
