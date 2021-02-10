@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Nav, NavItem, Button} from "reactstrap";
+import {Nav, NavItem} from "reactstrap";
 import icon from "../assets/hypcycle-icon.png";
 import {Link} from 'react-router-dom';
 
@@ -41,9 +41,6 @@ function Sidebar () {
                 <NavItem className="sidebar-item">
                     <Link to="/users"><img alt="users" src="https://img.icons8.com/ios-filled/30/000000/user-group-man-man.png"/></Link>
                     <Link to="/users" className={open ? "sidebar-link sidebar-last" : "hide"}>Users</Link>
-                </NavItem>
-                <NavItem className="sidebar-item">
-                    <Button className={open ? "open-stuck-button" : "stuck-button"}>Help</Button>
                 </NavItem>
             </Nav>
         </div>

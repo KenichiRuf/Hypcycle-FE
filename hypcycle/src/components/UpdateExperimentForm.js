@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import binomialCDF from '../functions/binomialCDF';
 import axios from 'axios';
 import Mixpanel from '../functions/Mixpanel';
 
@@ -23,6 +24,14 @@ function UpdateExperimentForm(props) {
         })
         .then(function(res) {
             Mixpanel.track("Experiment Update")
+            props.setExperiment({
+                ...props.experiment,
+                trials: trials,
+                successes: successes
+            })
+            props.setConfidence(
+                Math.round(100*binomialCDF(trials, successes, props.experiment.target_success_rate))/100
+            )
             props.toggle();
         })
         .catch(function(err) {console.log(err)})
