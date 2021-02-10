@@ -7,10 +7,10 @@ import AddPlayForm from './AddPlayForm';
 
 function Experiment(props) {
 
-    const confidence = binomialCDF(props.experiment.trials, props.experiment.successes, props.experiment.target_success_rate)
-    
     const [updateModal, setUpdateModal] = useState(false)
     const [addPlayModal, setAddPlayModal] = useState(false)
+    const [experiment, setExperiment] = useState(props.experiment)
+    const [confidence, setConfidence] = useState(Math.round(100*binomialCDF(props.experiment.trials, props.experiment.successes, props.experiment.target_success_rate))/100)
 
     const toggleUpdateModal = () => setUpdateModal(!updateModal)
     const toggleAddPlayModal = () => setAddPlayModal(!addPlayModal)
@@ -18,11 +18,12 @@ function Experiment(props) {
     return(
         <div className="experiment">
             <div className="experiment-content">
-                <h2 className="experiment-description">{props.experiment.description}</h2>
+                <h2 className="experiment-description">{experiment.description}</h2>
                 <div className="experiment-stats">
-                    <p className="experiment-stat">Trials: {props.experiment.trials}</p>
-                    <p className="experiment-stat">Successes: {props.experiment.successes}</p>
-                    <p className="experiment-stat">Target Success Rate: {props.experiment.target_success_rate*100}%</p>
+                    <p className="experiment-stat">Trials: {experiment.trials}</p>
+                    <p className="experiment-stat">Successes: {experiment.successes}</p>
+                    <p className="experiment-stat">Success Rate: {experiment.successes/experiment.trials}</p>
+                    <p className="experiment-stat">Target Success Rate: {experiment.target_success_rate*100}%</p>
                     <p className={confidence > .95 ? "experiment-stat success" : "experiment-stat"}>Confidence Level: {round(confidence, 4)*100}%</p>
                 </div>
             </div>
@@ -31,10 +32,15 @@ function Experiment(props) {
                 <Button className="add-to-playbook-button enabled" onClick={() => toggleAddPlayModal()} disabled={confidence > .95 ? false : true} color={confidence > .95 ? "success" : "secondary"}>Add To Playbook</Button>
             </div>
             <Modal isOpen={updateModal} toggle={toggleUpdateModal}>
-                <UpdateExperimentForm toggle={toggleUpdateModal} experiment={props.experiment}/>
+                <UpdateExperimentForm
+                    toggle={toggleUpdateModal}
+                    experiment={experiment}
+                    setExperiment={setExperiment}
+                    setConfidence={setConfidence}
+                />
             </Modal>
             <Modal isOpen={addPlayModal} toggle={toggleAddPlayModal}>
-                <AddPlayForm experiment={props.experiment}/>
+                <AddPlayForm experiment={experiment}/>
             </Modal>
         </div>
     )

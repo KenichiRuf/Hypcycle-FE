@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import binomialCDF from '../functions/binomialCDF';
 import axios from 'axios';
-
 
 function UpdateExperimentForm(props) {
 
@@ -22,6 +22,14 @@ function UpdateExperimentForm(props) {
             successes: successes
         })
         .then(function(res) {
+            props.setExperiment({
+                ...props.experiment,
+                trials: trials,
+                successes: successes
+            })
+            props.setConfidence(
+                Math.round(100*binomialCDF(trials, successes, props.experiment.target_success_rate))/100
+            )
             props.toggle();
         })
         .catch(function(err) {console.log(err)})
