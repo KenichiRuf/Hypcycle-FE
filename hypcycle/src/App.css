@@ -178,7 +178,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   height: 80px;
   width: 100%;
   background-color: #15e5e9;
@@ -196,7 +196,7 @@
 .sidebar-items {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   min-height: 100vh;
   background-color: #f9f9f9;
   padding-left: 15px !important;
@@ -204,7 +204,7 @@
 
 .sidebar-item {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   margin-top: 45px;
   width: 100%;
 }
