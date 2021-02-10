@@ -5,6 +5,7 @@ import axios from 'axios';
 import Navigation from '../components/Navigation';
 import Org from "../components/Org";
 import {Link} from 'react-router-dom';
+import Mixpanel from '../functions/Mixpanel';
 
 function Login () {
     const [email, setEmail] = useState()
@@ -56,6 +57,8 @@ function Login () {
                 setSpin(false);
                 setSuccess(true);
                 localStorage.setItem("token", res.data.token);
+                Mixpanel.identify(res.data.userId)
+                Mixpanel.track_forms("#login-form", "Login")
             })
             .catch(err => {
                 setSpin(false);
@@ -66,7 +69,7 @@ function Login () {
     return(
         <div className="login-container">
             <Navigation />
-            <Form className="login-form" onSubmit={login}>
+            <Form className="login-form" id="login-form" onSubmit={login}>
                 <h1 className="form-title">Login</h1>
                 <hr className="form-divider"/>
                 <div className="form-inputs">

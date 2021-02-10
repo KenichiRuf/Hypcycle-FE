@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import binomialCDF from '../functions/binomialCDF';
 import axios from 'axios';
+import Mixpanel from '../functions/Mixpanel';
 
 function UpdateExperimentForm(props) {
 
@@ -22,6 +23,7 @@ function UpdateExperimentForm(props) {
             successes: successes
         })
         .then(function(res) {
+            Mixpanel.track("Experiment Update")
             props.setExperiment({
                 ...props.experiment,
                 trials: trials,

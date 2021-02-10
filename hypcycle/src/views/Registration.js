@@ -6,6 +6,7 @@ import DoubleCheckMark from '../assets/icons/DoubleCheckMark';
 import XCircle from '../assets/icons/XCircle';
 import Navigation from '../components/Navigation';
 import {Link} from 'react-router-dom';
+import Mixpanel from '../functions/Mixpanel';
 
 function Registration () {
     const [firstName,setFirstName] = useState()
@@ -56,7 +57,14 @@ function Registration () {
                 password: password,
                 companyName: companyName
             })
-            .then(res => setRegistered(true))
+            .then(res => {
+                Mixpanel.identify(res.data.userId)
+                Mixpanel.people.set({
+                    "USER_ID": res.data.userId,
+                    "Sign Up Date": new Date().toISOString()
+                })
+                setRegistered(true)
+            })
             .catch(err => setError(err.message))
         } else {
             setError("Passwords must match")
@@ -66,7 +74,7 @@ function Registration () {
     return(
         <div className="registration-container">
             <Navigation />
-            <Form className="registration-form" onSubmit={register}>
+            <Form className="registration-form" id="registration-form" onSubmit={register}>
                 <h1 className="form-title">Create Account</h1>
                 <hr className="form-divider"/>
                 <div className="form-inputs">
