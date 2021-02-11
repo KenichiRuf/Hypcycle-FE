@@ -58,9 +58,8 @@ function Registration () {
                 companyName: companyName
             })
             .then(res => {
-                Mixpanel.identify(res.data.userId)
+                Mixpanel.alias(email)
                 Mixpanel.people.set({
-                    "USER_ID": res.data.userId,
                     "Sign Up Date": new Date().toISOString()
                 })
                 setRegistered(true)

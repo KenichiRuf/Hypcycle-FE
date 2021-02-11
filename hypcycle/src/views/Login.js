@@ -57,7 +57,7 @@ function Login () {
                 setSpin(false);
                 setSuccess(true);
                 localStorage.setItem("token", res.data.token);
-                Mixpanel.identify(res.data.userId)
+                Mixpanel.identify(email)
                 Mixpanel.track("Login")
             })
             .catch(err => {
