@@ -5,12 +5,14 @@ import UpdateGoalForm from './UpdateGoalForm';
 import AddIdeaFromGoal from './AddIdeaFromGoal';
 import EditGoalForm from './EditGoalForm';
 import axios from 'axios';
+import DeleteIcon from '../assets/icons/DeleteIcon';
 
 function Goal(props) {
 
     const [updateModal, setUpdateModal] = useState(false)
     const [addIdeaModal, setAddIdeaModal] = useState(false)
     const [editModal, setEditModal] = useState(false)
+    const [deleteModal, setDeleteModal] = useState(false)
     const [current, setCurrent] = useState(props.goal['current_value'])
     const [status, setStatus] = useState("")
     const [ideas, setIdeas] = useState()
@@ -20,6 +22,7 @@ function Goal(props) {
     const toggleUpdateModal = () => setUpdateModal(!updateModal)
     const toggleAddIdea = () => setAddIdeaModal(!addIdeaModal)
     const toggleEditModal = () => setEditModal(!editModal)
+    const toggleDeleteModal = () => setDeleteModal(!deleteModal)
 
     const today = new Date()
     const start = new Date(props.goal["start_date"])
@@ -57,6 +60,16 @@ function Goal(props) {
             .catch(err => console.log(err))
     }, [props.goal.id])
 
+    const deleteGoal= () => {
+        const goals = props.goalList.filter(goal => goal.id !== props.goal.id)
+        axios.delete(`/api/goals/${props.goal.id}`)
+        .then(res => {
+            props.setGoalList(goals)
+            setDeleteModal(false)
+        })
+        .catch(err => console.log(err))
+    }
+
     return(
         <div className={`goal ${status}`}>
             <div className="goal-left">
@@ -76,6 +89,9 @@ function Goal(props) {
                     <p>Ideas</p>
                     <p>{ideas}</p>
                 </div>
+                <div className="delete-icon" onClick={() => setDeleteModal(true)}>
+                    {DeleteIcon}
+                </div>
             </div>
             <Modal isOpen={updateModal} toggle={toggleUpdateModal}>
                 <UpdateGoalForm goal={props.goal} toggle={toggleUpdateModal} update={setCurrent}/>
@@ -85,6 +101,10 @@ function Goal(props) {
             </Modal>
             <Modal isOpen={editModal} toggle={toggleEditModal}>
                 <EditGoalForm goal={props.goal} toggle={toggleEditModal} setGoal={setGoal}/>
+            </Modal>
+            <Modal isOpen={deleteModal} toggle={toggleDeleteModal}>
+                <h3>Are You Sure You Want to Delete This Goal?</h3>
+                <Button onClick={deleteGoal}>Yes, Delete This Goal</Button>
             </Modal>
         </div>
     )
