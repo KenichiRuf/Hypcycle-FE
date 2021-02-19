@@ -60,7 +60,11 @@ function Registration () {
             .then(res => {
                 Mixpanel.alias(email)
                 Mixpanel.people.set({
-                    "Sign Up Date": new Date().toISOString()
+                    "$email": email,
+                    "Sign Up Date": new Date().toISOString(),
+                    "Org Name": companyName,
+                    "First Name": firstName,
+                    "Last Name": lastName
                 })
                 setRegistered(true)
             })

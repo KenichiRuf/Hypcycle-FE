@@ -52,13 +52,14 @@ function Login () {
                 password: password
             })
             .then(res => {
+                Mixpanel.identify(email)
                 localStorage.setItem("userId", res.data.userId)
                 getOrgs(res.data.userId)
                 setSpin(false);
                 setSuccess(true);
                 localStorage.setItem("token", res.data.token);
-                Mixpanel.identify(email)
                 Mixpanel.track("Login")
+                Mixpanel.people.set({"$email": email})
             })
             .catch(err => {
                 setSpin(false);

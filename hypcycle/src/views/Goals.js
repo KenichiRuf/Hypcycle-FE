@@ -50,7 +50,7 @@ function Goals () {
                                     <p>You haven't created any goals yet.</p>
                                     <Button onClick={toggle}>+Add Goal</Button>
                                 </div>
-                                : goalList.map(goal => <Goal goal={goal}/>)}
+                                : goalList.map(goal => <Goal goal={goal} goalList={goalList} setGoalList={setGoalList}/>)}
                         </div>    
                     }
                 </div>

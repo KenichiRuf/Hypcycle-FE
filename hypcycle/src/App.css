@@ -19,6 +19,10 @@
   padding: 10px;
 }
 
+.delete-icon:hover {
+  cursor: pointer;
+}
+
 /* App */
 .app-container {
   display: flex;
