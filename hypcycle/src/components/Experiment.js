@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {Button, Modal} from 'reactstrap';
 import binomialCDF from '../functions/binomialCDF';
 import UpdateExperimentForm from './UpdateExperimentForm';
-import {round} from 'mathjs';
 import AddPlayForm from './AddPlayForm';
 
 function Experiment(props) {
