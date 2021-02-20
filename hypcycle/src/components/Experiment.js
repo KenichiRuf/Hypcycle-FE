@@ -24,7 +24,7 @@ function Experiment(props) {
                     <p className="experiment-stat">Successes: {experiment.successes}</p>
                     <p className="experiment-stat">Success Rate: {Math.round(10000*experiment.successes/experiment.trials)/100}%</p>
                     <p className="experiment-stat">Target Success Rate: {experiment.target_success_rate*100}%</p>
-                    <p className={confidence > .95 ? "experiment-stat success" : "experiment-stat"}>Confidence Level: {round(confidence, 4)*100}%</p>
+                    <p className={confidence > .95 ? "experiment-stat success" : "experiment-stat"}>Confidence Level: {Math.round(confidence*10000)/100}%</p>
                 </div>
             </div>
             <div className="experiment-buttons">

@@ -10,7 +10,7 @@ function DashboardChart(props) {
                 height={200}
                 width={200}
             />
-            <span>Progress: {`${100*(props.goal.current_value-props.goal.start_value)/(props.goal.goal_value-props.goal.start_value)}%`}</span>
+            <span>Progress: {`${Math.round(10000*(props.goal.current_value-props.goal.start_value)/(props.goal.goal_value-props.goal.start_value))/100}%`}</span>
         </div>
     )
 }
