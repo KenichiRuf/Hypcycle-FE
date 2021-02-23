@@ -14,9 +14,9 @@ const IdeaList = (props) => {
             : items[result.destination.index - 1]
         const [reorderedItem] = items.splice(result.source.index, 1);
         items.splice(result.destination.index, 0, reorderedItem);
-
-        props.setIdeas(items);
         
+        props.setIdeas(items);
+
         axios.put(`/api/ideas/move`, {
             idea: reorderedItem,
             reference: reference,
