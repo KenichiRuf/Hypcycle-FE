@@ -17,7 +17,7 @@ function EditIdeaForm(props) {
 
     const editIdea = e => {
         e.preventDefault();
-        axios.put(`/api/ideas/${props.idea.id}`, {
+        axios.put(`/api/ideas/edit/${props.idea.id}`, {
             name: ideaName,
             description: description
         })
