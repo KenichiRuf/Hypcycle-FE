@@ -34,10 +34,10 @@ function Sidebar () {
                     <Link to="/experiments"><img alt="experiments" src="https://img.icons8.com/ios-filled/30/000000/thin-test-tube.png"/></Link>
                     <Link to="/experiments" className={open ? "sidebar-link" : "hide"}>Experiments</Link>
                 </NavItem>
-                {/* <NavItem className="sidebar-item">
+                <NavItem className="sidebar-item">
                     <Link to="/playbooks"><img alt="playbooks" src="https://img.icons8.com/ios-filled/30/000000/strategy-board.png"/></Link>
                     <Link to="/playbooks" className={open ? "sidebar-link" : "hide"}>Playbooks</Link>
-                </NavItem> */}
+                </NavItem>
                 <NavItem className="sidebar-item">
                     <Link to="/users"><img alt="users" src="https://img.icons8.com/ios-filled/30/000000/user-group-man-man.png"/></Link>
                     <Link to="/users" className={open ? "sidebar-link sidebar-last" : "hide"}>Users</Link>

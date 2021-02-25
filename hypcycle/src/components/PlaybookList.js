@@ -4,13 +4,11 @@ import Playbook from './Playbook';
 const PlaybookList = (props) => {
       
     return(
-       <ul className="playbook-list">
+       <div className="playbook-list">
             {props.playbooks.map(playbook =>
-                <li>
-                    <Playbook playbook={playbook}/>
-                </li>
+                <Playbook playbook={playbook}/>
             )}
-        </ul>
+        </div>
     )
 }
 

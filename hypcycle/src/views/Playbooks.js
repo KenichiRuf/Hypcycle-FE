@@ -10,7 +10,8 @@ import Axios from 'axios';
 
 function Playbooks () {
 
-    const [playbooks, setPlaybooks] = useState([])
+    const [defaultPlaybooks, setDefaultPlaybooks] = useState([])
+    const [customPlaybooks, setCustomPlaybooks] = useState([])
     const [addPlaybookModal, setAddPlaybookModal] = useState(false)
     const [loading, setLoading] = useState(true)
 
@@ -19,16 +20,23 @@ function Playbooks () {
     const toggleAddPlaybookModal = () => setAddPlaybookModal(!addPlaybookModal)
 
     useEffect(() => {
-        Axios.get(`/api/playbooks/${localStorage.getItem("orgId")}`)
+        Axios.get(`/api/playbooks/1`)
             .then(res => {
-                setPlaybooks(res.data.playbooks)
+                setDefaultPlaybooks(res.data.playbooks)
                 setTimeout(stopLoading, 1000)
             })
             .catch(err => {
                 setTimeout(stopLoading, 1000)
-                console.log(err)
             })
-    })
+        Axios.get(`/api/playbooks/${localStorage.getItem("orgId")}`)
+            .then(res => {
+                setCustomPlaybooks(res.data.playbooks)
+                setTimeout(stopLoading, 1000)
+            })
+            .catch(err => {
+                setTimeout(stopLoading, 1000)
+            })
+    }, [])
 
     return(
         <div className="app-container">
@@ -45,19 +53,21 @@ function Playbooks () {
                             <Spinner style={{width: "200px", height: "200px"}} color="info" />
                         </div>
                         : <div>
-                            {playbooks.length === 0
+                            <PlaybookList playbooks={defaultPlaybooks} setPlaybooks={setDefaultPlaybooks}/>
+                            <h2>Custom Playbooks</h2>
+                            {customPlaybooks.length === 0
                                 ? <div>
                                     <p>You haven't created any playbooks yet.</p>
                                     <Button onClick={() => setAddPlaybookModal(true)}>+Add Playbook</Button>
                                 </div>
-                                : <PlaybookList playbooks={playbooks} setPlaybooks={setPlaybooks}/>
+                                : <PlaybookList playbooks={customPlaybooks} setPlaybooks={setCustomPlaybooks}/>
                             }
                         </div>
                     }
                 </div>
             </div>
             <Modal isOpen={addPlaybookModal} toggle={toggleAddPlaybookModal}>
-                <AddPlaybookForm setPlaybooks={setPlaybooks}/>
+                <AddPlaybookForm setPlaybooks={setCustomPlaybooks}/>
             </Modal>
         </div>
     )

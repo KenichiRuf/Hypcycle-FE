@@ -40,7 +40,7 @@ function App() {
       <PrivateRoute exact path="/playbooks" component={Playbooks} />
       <PrivateRoute exact path="/users" component={Users} />
       <PrivateRoute exact path="/new-org" component={CreateNewOrg} />
-      <PrivateRoute exact path="/playbooks/:id" render={props => <PlaybookView {...props}/>} />
+      <PrivateRoute exact path="/playbooks/:id" component={PlaybookView} />
       <Route exact path="/reset-password" component={ResetPassword}/>
       <Route exact path="/update-profile" component={UpdateProfile}/>
       <Route path="/invite/:email/:userId/:orgId/:password" component={Invite}/>
