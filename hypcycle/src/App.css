@@ -707,3 +707,51 @@
   justify-content: center;
   align-items: center;
 }
+
+/* Play */
+
+.play {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  background-color: #f5f6f7;
+  margin-top: 10px;
+  padding-left: 10px;
+}
+
+.play-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #f5f6f7;
+  padding: 10px;
+  padding-right: 30px;
+}
+
+.play-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.use-play-modal {
+  height: 90vh;
+}
+
+.use-play-modal-controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Steps */
+.step {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.step-description {
+  margin-left: 20px;
+}

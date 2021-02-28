@@ -12,6 +12,7 @@ import Users from './views/Users';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 import PlaybookView from './views/PlaybookView';
+import PlayView from './views/PlayView';
 import ResetPassword from './views/ResetPassword';
 import CreateNewOrg from './views/CreateNewOrg';
 import Invite from './views/Invite';
@@ -41,6 +42,7 @@ function App() {
       <PrivateRoute exact path="/users" component={Users} />
       <PrivateRoute exact path="/new-org" component={CreateNewOrg} />
       <PrivateRoute exact path="/playbooks/:id" component={PlaybookView} />
+      <PrivateRoute exact path="/plays/:id" component={PlayView} />
       <Route exact path="/reset-password" component={ResetPassword}/>
       <Route exact path="/update-profile" component={UpdateProfile}/>
       <Route path="/invite/:email/:userId/:orgId/:password" component={Invite}/>

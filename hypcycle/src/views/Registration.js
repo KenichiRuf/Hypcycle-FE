@@ -46,6 +46,24 @@ function Registration () {
         setConfirmPassword(e.target.value)
     }
 
+    const login = () => {
+        axios.post( `/api/auth/login`, {
+                email: email,
+                password: password
+            })
+            .then(res => {
+                Mixpanel.identify(email)
+                localStorage.setItem("userId", res.data.userId)
+                localStorage.setItem("token", res.data.token);
+                Mixpanel.track("Login")
+                Mixpanel.people.set({"$email": email})
+                setRegistered(true)
+            })
+            .catch(err => {
+                setError("Login Failed");
+            })
+    }
+
     const register = event => {
         event.preventDefault()
         setError("")
@@ -66,7 +84,9 @@ function Registration () {
                     "First Name": firstName,
                     "Last Name": lastName
                 })
-                setRegistered(true)
+                localStorage.setItem("orgId", res.data.orgId)
+                localStorage.setItem("orgUserId", res.data.orgUserId)
+                login()
             })
             .catch(err => setError(err.message))
         } else {
@@ -110,7 +130,7 @@ function Registration () {
                 {error ? <p>{error}</p> : null}
                 <p className="login-here">Already have an account? <Link to="/login">Login here.</Link></p>
             </Form>
-            {registered ? <Redirect to="/login" /> : null}
+            {registered ? <Redirect to="/dashboard" /> : null}
         </div>
     )
 }

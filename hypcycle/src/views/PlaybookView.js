@@ -17,7 +17,6 @@ function PlaybookView(props) {
     useEffect(() => {
         axios.get(`/api/playbooks/playbook/${props.match.params.id}`)
             .then(res => {
-                console.log(res.data)
                 setPlaybook(res.data.playbook)
             })
             .catch(err => setError(err))
@@ -36,7 +35,7 @@ function PlaybookView(props) {
                 <Header />
                 <div className="view-container">
                     <div className="title-buttons">
-                        {playbook ? <h1>{playbook.name}</h1> : null}
+                        {playbook ? <h1>{playbook.name} Playbook</h1> : null}
                     </div>
                     {loading ? <div className="loading-indicator">
                                 <Spinner style={{width: "200px", height: "200px"}} color="info" />

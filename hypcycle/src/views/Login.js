@@ -37,10 +37,14 @@ function Login () {
     const getOrgs = userId => {
         axios.get(`/api/users/orgUser/${userId}`)
             .then(function(res) {
-                setOrgUsers(res.data.orgUsers);
+                if(res.data.orgUsers.length === 1){
+                    chooseOrg(res.data.orgUsers[0].org_id, res.data.orgUsers[0].orgUser.id)
+                } else {
+                    setOrgUsers(res.data.orgUsers);
+                    setModal(true)
+                };
             })
             .catch(function(err) {setError(err)});
-        setModal(true);
     }
 
     const login = event => {
