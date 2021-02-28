@@ -14,11 +14,13 @@ import {Link} from 'react-router-dom';
 
 function Dashboard () {
 
-    const [loadingStats, setLoadingStats] = useState(true)
+    const [loading, setLoading] = useState(true)
     const [experiments, setExperiments] = useState([])
     const [goals, setGoals] = useState([])
     const [ideas, setIdeas] = useState([])
     const [dashboardGoals, setDashboardGoals] = useState([])
+
+    const stopLoading = () => setLoading(false)
 
     useEffect(() => {
         axios.get(`/api/dashboard/${localStorage.getItem("orgId")}`)
@@ -26,7 +28,7 @@ function Dashboard () {
                 setExperiments(res.data.data.experiments)
                 setGoals(res.data.data.goals)
                 setIdeas(res.data.data.ideas)
-                setLoadingStats(false)
+                setTimeout(stopLoading, 1000)
                 let i
                 let topGoals = []
                 for(i = 0; i<Math.min(3,res.data.data.goals.length); i++) {
@@ -43,39 +45,40 @@ function Dashboard () {
             <div className="app-content">
                 <Header />
                 <div className="view-container">
-                    {loadingStats ? <Spinner style={{width: "200px", height: "200px"}} color="info" />
-                        : <div className="dashboard-stats">
+                    {loading ? <Spinner style={{width: "200px", height: "200px"}} color="info" />
+                    : <div>
+                        <div className="dashboard-stats">
                             <DashboardStat title="ACTIVE EXPERIMENTS" value={experiments.length} icon={TestTubeIcon} metric="Experiment"/>
                             <DashboardStat title="ACTIVE GOALS" value={goals.length} icon={GoalIcon} metric="Goal"/>
                             <DashboardStat title="IDEA BACKLOG" value={ideas.length} icon={IdeaIcon} metric="Idea"/>
                         </div>
-                    }
-                    <div className="dashboard-charts">
-                        <div className="dashboard-goal-progress dashboard-border">
-                            <h3>Goal Progress</h3>
-                            <div className="dashboard-goal-charts">
-                                {goals.length === 0
-                                ? <div>
-                                    <p>You haven't set any goals yet.</p>
-                                    <Link to="/goals"><Button>Create Goals</Button></Link>
+                        <div className="dashboard-charts">
+                            <div className="dashboard-goal-progress dashboard-border">
+                                <h3>Goal Progress</h3>
+                                <div className="dashboard-goal-charts">
+                                    {goals.length === 0
+                                    ? <div>
+                                        <p>You haven't set any goals yet.</p>
+                                        <Link to="/goals"><Button>Create Goals</Button></Link>
+                                    </div>
+                                    : dashboardGoals.map(goal => <DashboardGoalChart goal={goal} />)}
                                 </div>
-                                : dashboardGoals.map(goal => <DashboardGoalChart goal={goal} />)}
+                            </div>
+                            <div className="dashboard-idea-breakdown dashboard-border">
+                                <h3>Idea Breakdown</h3>
+                                {ideas.length === 0
+                                    ? <div>
+                                        <p>You haven't created any ideas yet.</p>
+                                        <Link to="/ideas"><Button>Create Ideas</Button></Link>
+                                    </div>
+                                    : <DashboardIdeaChart ideas={ideas} />}
                             </div>
                         </div>
-                        <div className="dashboard-idea-breakdown dashboard-border">
-                            <h3>Idea Breakdown</h3>
-                            {ideas.length === 0
-                                ? <div>
-                                    <p>You haven't created any ideas yet.</p>
-                                    <Link to="/ideas"><Button>Create Ideas</Button></Link>
-                                </div>
-                                : <DashboardIdeaChart ideas={ideas} />}
+                        <div className="dashboard-top-experiments">
+                            <h4>TOP EXPERIMENTS</h4>
+                            <ExperimentList experiments={experiments}/>
                         </div>
-                    </div>
-                    <div className="dashboard-top-experiments">
-                        <h4>TOP EXPERIMENTS</h4>
-                        <ExperimentList experiments={experiments}/>
-                    </div>
+                    </div>}
                 </div>
             </div>
         </div>

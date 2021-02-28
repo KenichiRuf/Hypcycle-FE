@@ -37,14 +37,16 @@ function Login () {
     const getOrgs = userId => {
         axios.get(`/api/users/orgUser/${userId}`)
             .then(function(res) {
+                setSpin(false);
+                setSuccess(true);
                 if(res.data.orgUsers.length === 1){
-                    chooseOrg(res.data.orgUsers[0].org_id, res.data.orgUsers[0].orgUser.id)
+                    chooseOrg(res.data.orgUsers[0].org_id, res.data.orgUsers[0].id)
                 } else {
                     setOrgUsers(res.data.orgUsers);
                     setModal(true)
                 };
             })
-            .catch(function(err) {setError(err)});
+            .catch(function(err) {setError(err.message)});
     }
 
     const login = event => {
@@ -59,8 +61,6 @@ function Login () {
                 Mixpanel.identify(email)
                 localStorage.setItem("userId", res.data.userId)
                 getOrgs(res.data.userId)
-                setSpin(false);
-                setSuccess(true);
                 localStorage.setItem("token", res.data.token);
                 Mixpanel.track("Login")
                 Mixpanel.people.set({"$email": email})
