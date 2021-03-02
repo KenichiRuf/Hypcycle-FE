@@ -6,9 +6,7 @@ const PlayList = (props) => {
     return(
        <div className="play-list">
             {props.plays.map(play =>
-                <div>
-                    <Play play={play}/>
-                </div>
+                    <Play play={play} key={play.id}/>
             )}
         </div>
     )

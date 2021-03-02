@@ -23,6 +23,11 @@
   cursor: pointer;
 }
 
+.checkbox {
+  width: 25px;
+  height: 25px;
+}
+
 /* App */
 .app-container {
   display: flex;
@@ -749,9 +754,40 @@
 .step {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 }
 
 .step-description {
+  max-width: 90%;
   margin-left: 20px;
+}
+
+/* Objectives */
+.objective {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #f5f6f7;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.objective-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100px;
+}
+.objective-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90px;
+}
+
+.details-button {
+  height: 45%;
+}
+
+.import-button {
+  height: 45%
 }

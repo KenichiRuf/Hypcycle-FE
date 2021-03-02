@@ -70,7 +70,7 @@ function Header () {
             <Modal isOpen={switchOrgModal} toggle={toggleSwitchOrg} onClosed={onSwitchOrgClosed}>
                 <h2>Choose Org:</h2>
                 <div className="org-list">
-                    {orgUsers.map(orgUser => <Org name={orgUser.name} id={orgUser.org_id} chooseOrg={chooseOrg}/>)}
+                    {orgUsers.map(orgUser => <Org name={orgUser.name} id={orgUser.org_id} chooseOrg={chooseOrg} key={orgUser.id}/>)}
                 </div>
             </Modal>
             {redirect ? <Redirect to='/login'/> : null}

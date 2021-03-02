@@ -8,7 +8,7 @@ function Play(props) {
         <div className="play">
             <div className="play-content">
                 <div className="play-left">
-                    <h2 className="play-name">{props.play.name}</h2>
+                    <h4 className="play-name">{props.play.name}</h4>
                     <p className="play-description">{props.play.description}</p>
                 </div>
                 <div className="play-right">

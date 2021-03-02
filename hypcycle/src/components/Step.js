@@ -4,8 +4,8 @@ function Step(props) {
 
     return(
         <div className="step">
-            <label for={props.step.id} className="step-description">Step {props.order}. {props.step.description}</label>
-            <input type="checkbox" id={props.step.id}/>
+            <input className="checkbox" type="checkbox" id={props.step.id}/>
+            <label for={props.step.id} className="step-description">Step {props.order}: {props.step.description}</label>
         </div>
     )
 }

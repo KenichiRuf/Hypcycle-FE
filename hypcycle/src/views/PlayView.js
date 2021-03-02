@@ -22,7 +22,8 @@ function PlayView(props) {
                 setLoading(false)
             })
             .catch(err => {
-                setMessage(err)
+                setMessage(err.message)
+                setLoading(false)
             })
     }, [props.match.params.id])
     
